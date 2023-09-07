@@ -1,0 +1,50 @@
+{% extends 'admin/layout.html' %}
+{% load static %}
+{% block content%} 
+
+
+
+
+<div class="container" >
+    <div class="card p-5" >
+
+        <div id='error_message'>
+            {% include 'includes/alerts.html' %}
+           </div>
+        <h3 class="text-center">Customer Queries Solution</h3>
+        <hr class="hr-center">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6 mt-2">
+                    <label for="subject">Mail &nbsp;subject&nbsp;:</label>
+                </div>
+                <div class="col-md-6 mt-2">
+                    <input type="text" name="subject" class="form-control" id="subject" value="{{form.subject.value | default_if_none:''}}" required>
+                    <span class="text-danger">{{form.errors.subject}}</span>
+                </div>
+            </div>
+            <div class="row">
+            <div class="col-md-6 mt-2">
+                <label for="solution">Explain</label>
+            </div>
+            <div class="col-md-6 mt-2">
+                <input type="text" name="solutiom" class="form-control" id="solution" value="{{form.solutiom.value  | default_if_none:''}}" required >
+                <span class="text-danger">{{form.errors.solutiom}}</span>
+            </div>
+        </div>
+ 
+
+    <hr class="hr-center">
+    <div class="mt-2 text-center">
+        <button type="submit" class="btn btn-outline-success">Save</button>
+        <button type="reset" class="btn btn-outline-danger">Cancel</button>
+    </div>
+
+         
+            </form>
+        </div>
+    </div>
+
+
+{% endblock content %}

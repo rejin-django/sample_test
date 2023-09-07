@@ -1,0 +1,250 @@
+
+{% extends 'admin/layout.html' %}
+{% load static %}
+{% block content%} 
+
+<style>
+    
+    .dtsp-panes, .dtsp-panesContainer {
+        display: none;
+    }
+    #example {
+        float : right !important;
+    }
+
+
+
+</style>
+<div class="container">
+    <div class="card p-5">
+        <h3 class="text-center">Supplier Return Detail</h3>
+        <hr class="hr-center">
+        <form action="" method="post">
+            {% csrf_token %}
+    
+            <div class="table-responsive"> 
+                <table id="example" class="table table-striped nowrap"  style="overflow-x:auto;width:100%;">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Return Id </th>
+                            <th>Customer name </th>
+
+                            <th>Product Name </th>
+                            {% comment %} <th>Product Image</th> {% endcomment %}
+                            <th>Phone_number</th>
+                          
+                            <th>Address </th> 
+                            {% comment %} <th>Account No</th>
+                            <th>IFSC Code</th>
+                            <th>ACcount holder name</th> {% endcomment %}
+                            <th>Return pickup date </th> 
+                            <th>Action</th>
+                        </tr>
+                      
+                    </thead>
+                    <tbody>
+                        {% for i in order %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                             <td>{{i.return_id}}</td>
+                             <td>{{i.order.order.first_name}}</td>
+
+                            <td>{{i.order.product.product_name}}</td>
+                            {% comment %} <td><input type="file"  accept="image/*" name="images" id="file"  onchange="loadFile(event)" style="display: none;">
+                                <img id="output" width="100" height="70" src="{{i.order.product.images.url}}"/> <br>
+                                {% for j in i.variations.all %}
+                                {{j.variation_category}} - {{j.variation_value}} 
+                                {% endfor %}</td> {% endcomment %}
+                          
+                            <td>{{i.phone}}</td>
+                    
+                            <td>{{i.address_line_1}},{{i.address_line_2}} <br>
+                            {{i.city}}, {{i.state}},<br>
+                             {{country}}  <br>
+                            {{i.pincode}}
+                            </td>
+                            {% comment %} <td>{{i.confirm_account_no}}</td>
+                            <td>{{i.ifscno}}</td>
+                      
+                        <td>{{i.account_holder_name}}</td> {% endcomment %}
+                        <td>{{i.return_pickup_date}}</td>
+                        {% if i.admin_return_status == "return_requested" %}
+                       <td><button class="text-success"><a href="{% url 'supplier_return_confirm' i.id %}">Confirm return </a></button></td>
+                        {% comment %} {% elif i.admin_return_status == "return_confirmed" %}
+                        <td><button class="text-success"><a href="{% url 'supplier_return_complete' i.id %}">Return complete</a></button></td>
+                        {% elif i.admin_return_status == "return_complete" %}
+                        <td class="text-success"> Complete</td> {% endcomment %}
+                        {% else %}
+                        <td class="text-success">Return Confirmed</td>
+                        {% endif %}
+                    </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+    
+    
+    
+    </div>
+
+
+
+
+    <div class="container">
+        <div class="card p-5">
+            <h3 class="text-center">Supplier Return confirm detail </h3>
+            <hr class="hr-center">
+            <form action="" method="post">
+                {% csrf_token %}
+        
+                <div class="table-responsive"> 
+                    <table id="example" class="table table-striped nowrap"  style="overflow-x:auto;width:100%;">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Return Id </th>
+                                <th>Order number </th>
+
+                                <th>Customer name </th>
+    
+                                <th>Product Name </th>
+                                {% comment %} <th>Product Image</th> {% endcomment %}
+                                <th>Phone_number</th>
+                              
+                                <th>Address </th> 
+                                {% comment %} <th>Account No</th>
+                                <th>IFSC Code</th>
+                                <th>ACcount holder name</th> {% endcomment %}
+                             
+                                <th>Return pickup date </th> 
+                                <th>Current status </th> 
+
+                                <th>Action</th> 
+                            </tr>
+                          
+                        </thead>
+                        <tbody>
+                            {% for i in  return_obj %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                 <td>{{i.return_id}}</td>
+                                 <td>{{i.order.order.order_number}}</td>
+
+                                 <td>{{i.order.order.first_name}}</td>
+    
+                                <td>{{i.order.product.product_name}}</td>
+                                {% comment %} <td><input type="file"  accept="image/*" name="images" id="file"  onchange="loadFile(event)" style="display: none;">
+                                    <img id="output" width="100" height="70" src="{{i.order.product.images.url}}"/> <br>
+                                    {% for j in i.variations.all %}
+                                    {{j.variation_category}} - {{j.variation_value}} 
+                                    {% endfor %}</td> {% endcomment %}
+                              
+                                <td>{{i.phone}}</td>
+                        
+                                <td>{{i.address_line_1}},{{i.address_line_2}} ,
+                                {{i.city}}, {{i.state}},
+                                 {{country}} ,
+                                {{i.pincode}}
+                            </td>
+{% comment %}                           
+                            <td>{{i.confirm_account_no}}</td>
+                            <td>{{i.ifscno}}</td>
+                          
+                            <td>{{i.account_holder_name}}</td> {% endcomment %}
+                            <td>{{i.return_pickup_date}}</td>
+                            <td>Return confirmed</td>
+                            {% if i.admin_return_status == "return_confirmed" %}
+                            <td><button class="text-success"><a href="{% url 'supplier_return_complete' i.id %}">product pickup complete</a></button></td>
+                           {% else %}
+                           <td class="text-success">Return complete</td>
+                            {% endif %}
+                                
+                        </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+        
+        
+        
+        </div>
+
+
+{% comment %}
+
+        <div class="container">
+            <div class="card p-5">
+                <h3 class="text-center">Supplier Refund Complete</h3>
+                <hr class="hr-center">
+                <form action="" method="post">
+                    {% csrf_token %}
+            
+                    <div class="table-responsive"> 
+                        <table id="example" class="table table-striped nowrap"  style="overflow-x:auto;width:100%;">
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Return Id </th>
+                                    <th>Customer name </th>
+        
+                                    <th>Product Name </th>
+                                    <th>Product Image</th>
+                                    <th>Phone_number</th>
+                                  
+                                    <th>Address </th> 
+                                    <th>Account No</th>
+                                    <th>IFSC Code</th>
+                                    <th>ACcount holder name</th>
+                                    <th>Return pickup date </th> 
+                                    <th>Action</th> 
+                                     
+                                </tr>
+                              
+                            </thead>
+                            <tbody>
+                                {% for i in  refund_ob %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                     <td>{{i.return_id}}</td>
+                                     <td>{{i.order.order.first_name}}</td>
+        
+                                    <td>{{i.order.product.product_name}}</td>
+                                    <td><input type="file"  accept="image/*" name="images" id="file"  onchange="loadFile(event)" style="display: none;">
+                                        <img id="output" width="100" height="70" src="{{i.order.product.images.url}}"/> <br>
+                                        {% for j in i.variations.all %}
+                                        {{j.variation_category}} - {{j.variation_value}} 
+                                        {% endfor %}</td>
+                                  
+                                    <td>{{i.phone}}</td>
+                            
+                                    <td>{{i.address_line_1}},{{i.address_line_2}} <br>
+                                    {{i.city}}, {{i.state}},<br>
+                                     {{country}}  <br>
+                                    {{i.pincode}}
+                                </td>
+                                <td>{{i.confirm_account_no}}</td>
+                                <td>{{i.ifscno}}</td>
+                                <td>{{i.account_holder_name}}</td>
+                                <td>{{i.return_pickup_date}}</td>
+    
+                                <td class="text-success">Refunded</td>
+                            </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+            
+            
+            
+            </div> {% endcomment %}
+    
+
+
+{% endblock content %}

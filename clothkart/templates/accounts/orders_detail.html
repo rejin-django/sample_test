@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .fa-chevron-right {
+        font-size: 20px; 
+        color: #000; 
+        background-color: #ffffff; 
+        padding: none; 
+        box-shadow: none; 
+    }
+</style>
+<section class="bg">
+ <div class="container">
+    <div class="row">
+        <div class="col-md-3 mt-5 mb-5">
+            <div class="leftsideorder pl-4">
+                <h3><b>My Accounts</b></h3>
+                <h6>Orders & Credits</h6>
+                {% comment %} <ul>
+                    <li>Wallet</li>
+                    <li>Invite frnds</li>
+                </ul>
+                <h6>Orders & Credits</h6>
+                <ul>
+                    <li>Wallet</li>
+                    <li>Invite frnds</li>
+                </ul> {% endcomment %}
+            </div>
+        </div>
+
+        <div class="col-md-9 mt-5 mb-5">
+            <div class="rightsideorder pt-4 pb-4">
+                <h3 class="text-center"><b>My Orders</b></h3>
+                <h6 class="text-center">Track your product & view the summary of your past order</h6>
+                {% comment %} <span class="text-left pl-3">
+                    <select id="cars" class="p-2 bg">
+                        <option value="volvo" selected>Last 6 months</option>
+                        <option value="saab">Saab</option>
+                        <option value="vw">VW</option>
+                        <option value="audi">Audi</option>
+                    </select>
+                </span><br><br> {% endcomment %}
+                <span class="lightclr pl-2">Order Id: #{{order.order_number}}</span>
+                <div class="showproduct">
+                    <br>
+                    {% for i in order_detail %}
+                    
+                        <div class="d-flex align-items-center ml-4 mr-4 p-4">
+                            
+                            <div class="col-8 d-flex align-items-center ml-4 mr-4 p-4"  style="box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;">
+                                <a href="{% url 'return_detail' i.id %}">
+                                    <div class="row">
+                                <div class="col-5">
+                                    <input type="file"  accept="image/*" name="images" id="file"  onchange="loadFile(event)" style="display: none;">
+                                        <img id="output" width="100" height="70" src="{{i.product.images.url}}"/>
+                                   </div>
+                                   <div class="col-5">
+                                    <h5>{{i.product.product_name}}</h5>
+                                     {% for j in i.variations.all %}
+                                     <h6> {{j.variation_category}} - {{j.variation_value}} 
+                                        </h6>
+                                        {% endfor %}
+                                    <span class="lightclr">Order Id: #{{i.order.order_number}}</span>
+                                   </div>
+                              </div>
+                            </a>
+                            </div>
+                            {% if i.status_method == "Delivered" %}
+                            Delivered
+                            {% elif i.cancel_status == "Cancellation_requested" %}
+                           Cancellation requested 
+                            {% elif i.cancel_status == "Cancelled" %}
+                           Cancelled
+                           {% elif i.is_shipped %}
+                           <div class="col-2"> <button class="dbnone" onclick="mycancel()">Cancel</button></div>
+                            {% else %}
+                            <div class="col-2"><a href="{% url 'cancel_order_request' i.id %}"> <button class="dbnone" onclick="myFunction()">Cancel</button> </a></div>
+                         {% endif %}
+                         {% comment %} <div class="col-2"><a href="" class="">track order</a></div> {% endcomment %}
+                        </div>
+                
+                
+                     
+
+
+            
+                    <br>
+                
+                    {% endfor %}
+                    {% comment %} <a href="">
+                        <div class="d-flex align-items-center ml-4 mr-4 p-4" style="box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;">
+                       
+                            <div class="col-10 d-flex align-items-center">
+                               <div class="col-2">
+                                image
+                                <img src="" alt="" width="100%">
+                               </div>
+                               <div class="col-3">
+                                <h5>Product Name</h5>
+                                <span class="lightclr">Order Id: #202976U5Fs</span>
+                               </div>
+                               
+                            </div>
+                            <div class="col-2"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+                        </div>
+                    </a> {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+ </div>
+</section>
+ {% endblock content %}

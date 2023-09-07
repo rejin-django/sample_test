@@ -1,0 +1,76 @@
+{% extends 'admin/layout.html' %}
+{% load static %}
+{% block content%} 
+<div class="container">
+<div class="card p-5">
+    <h3 class="text-center">Salesman Order Details</h3>
+    <hr class="hr-center">
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped text-center">
+                <thead>
+                  
+                        <tr>
+                            <th rowspan="2">S.No</th>
+                            <th rowspan="2">Customer Name</th>
+                            <th rowspan="2">Order Number</th>
+                            <th rowspan="2">Phone Number</th>
+                            
+                            <th rowspan="2">Address</th>
+                            <th rowspan="2">Status</th>
+
+                            
+                            
+                          
+
+                           
+
+
+
+    
+                        
+                        </tr>
+                      
+                   
+                  
+                </thead>
+                <tbody>
+                    {% for i in view %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.order.first_name}} {{i.order.last_name}}</td>
+                        <td>{{i.order.order_number}}</td>
+                        <td>{{i.order.phone}}</td>
+
+                     
+                        <td> 
+                            {{i.order.address_line_1}} {{i.order.address_line_2}} <br>
+                            {{i.order.city}} {{i.order.state}} <br> 
+                            {{i.order.country}} {{i.order.pincode}} <br> </td>
+                    <td> <a href="{% url 'uploads_data' i.id  %}">Upload data</a></td> 
+
+                  
+
+                    <td> {{order_product.status_method}}</td> 
+                  
+                    
+               
+
+                    {% endfor %}
+             
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+
+
+
+</div>
+
+{% endblock  %} 
+
+
+

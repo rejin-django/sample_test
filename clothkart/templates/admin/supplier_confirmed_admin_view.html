@@ -1,0 +1,124 @@
+
+{% extends 'admin/layout.html' %}
+{% load static %}
+{% block content%} 
+<style>
+    
+    .dtsp-panes, .dtsp-panesContainer {
+        display: none;
+    }
+    #example {
+        float : right !important;
+    }
+
+
+
+</style>
+<div class="container">
+<div class="card p-5">
+    <h3 class="text-center">Supplier Confirmed Order Details</h3>
+    <hr class="hr-center">
+    <form action="" method="post">
+        {% csrf_token %}
+
+       <div class="table-responsive"> 
+            <table id="example" class="table table-striped nowrap"  style="overflow-x:auto;width:100%;">
+                <thead>
+                  
+                        <tr>
+                            {% comment %} <th >S.No</th> {% endcomment %}
+                            {% comment %} <th >Customer Name</th> {% endcomment %}
+                            <th >Order Number</th>
+                            <th >Phone Number</th>
+                            {% comment %} <th >Email</th> {% endcomment %}
+                            <th >Address</th>
+                            {% comment %} <th >Payment Method</th>
+                            <th >Order By</th> {% endcomment %}
+
+                            <th >Product Name</th>
+    
+                            <th >Product Image</th>
+    
+                           
+                            <th >Quantity</th>
+                            {% comment %} <th >View Variation</th> {% endcomment %}
+                            {% comment %} <th >Product Price </th>  {% endcomment %}
+                            {% comment %} <th >Tax </th>  {% endcomment %}
+                            <th >Total  </th> 
+                            <th >Date</th>
+                            <th >Status</th>
+
+                          
+
+                           
+
+
+
+    
+                        
+                        </tr>
+                      
+                   
+                  
+                </thead>
+                <tbody>
+                    {% for i in admin_view %}
+                    <tr>
+                        {% comment %} <td>{{forloop.counter}}</td> {% endcomment %}
+                        {% comment %} <td>{{i.order.first_name}} {{i.order.last_name}}</td> {% endcomment %}
+                        <td>{{i.order.order_number}}</td>
+                        <td>{{i.order.phone}}</td>
+
+                        {% comment %} <td>{{i.order.email}}</td> {% endcomment %}
+                        <td>
+                            {{i.order.address_line_1}} {{i.order.address_line_2}},
+                            {{i.order.city}}, {{i.order.state}},
+                            {{i.order.country}}, {{i.order.pincode}}  </td>
+
+                            {% comment %} <td>{{i.payment.payment_method}}</td>
+                            <td>{{i.user.first_name}}</td> {% endcomment %}
+
+                        <td>{{i.product.product_name}}</td>
+
+                        <td><input type="file"  accept="image/*" name="images" id="file"  onchange="loadFile(event)" style="display: none;">
+                            <img id="output" width="100" height="70" src="{{i.product.images.url}}"/><br>
+                            {% for j in i.variations.all %}
+                            {{j.variation_category}} - {{j.variation_value}} 
+                            {% endfor %}</td>
+                      
+
+                        <td>{{i.quantity}}</td>
+                        
+                        {% comment %} <td>
+                        {% for j in i.variations.all %}
+                       {{j.variation_category}} - {{j.variation_value}} 
+                       {% endfor %}
+                    </td> {% endcomment %}
+                    {% comment %} <td>{{i.product_price}}</td> {% endcomment %}
+                    {% comment %} <td>{{i.tax}}</td> {% endcomment %}
+                    <td>{{i.total_price}}</td>
+                    <td>{{i.created_at.date}}</td>
+                    {% comment %} {% if i.is_verified  %} {% endcomment %}
+
+{% comment %} <td>  Verified</a></td>  {% endcomment %}
+
+{% comment %} {% else %} {% endcomment %}
+<td> <a href="{% url 'verify_order' i.id  %}"> Verify</a></td> 
+
+{% comment %} {% endif %}  {% endcomment %}
+
+
+    </tr>
+{% endfor %}
+              
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+
+
+
+</div>
+
+{% endblock content %} 

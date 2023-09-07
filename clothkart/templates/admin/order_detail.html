@@ -1,0 +1,65 @@
+{% extends 'admin/layout.html' %}
+{% load static %}
+{% block content%} 
+<div class="container">
+<div class="card p-5">
+    <h3 class="text-center">Products</h3>
+    <hr class="hr-center">
+    <form action="" method="post">
+        {% csrf_token %}
+
+   <div class="table-responsive"> 
+            <table id="example" class="table table-striped nowrap"  style="overflow-x:auto;width:100%;">
+                <thead>
+                    <tr>
+                        <th >S.No</th>
+                        <th >Name</th>
+                        <th >Order number</th>
+                        <th >Phone_number</th>
+                        <th >Email</th>
+                        <th >Address </th> 
+                        <th >Order Total </th> 
+
+                    
+                    </tr>
+                  
+                </thead>
+                <tbody>
+                    {% for i in x %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.first_name}} {{i.last_name}}</td>
+                        <td>{{i.order_number}}</td>
+                        <td>{{i.phone}}</td>
+                        <td>{{i.email}}</td>
+                        <td>{{i.address_line_1}},{{i.address_line_2}} <br>
+                        {{i.city}}, {{i.state}},<br>
+                         {{country}}  <br>
+                        {{i.pincode}}
+                    </td>
+                    <td>{{i.order_total}}</td>
+
+
+                        
+
+                    
+                    
+                    
+                    
+                        
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+
+
+
+</div>
+
+{% endblock content %} 
+
+
+

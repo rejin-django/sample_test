@@ -1,0 +1,245 @@
+{% extends 'admin/layout.html' %}
+{% load static %}
+{% block content%} 
+
+<style>
+    
+    .dtsp-panes, .dtsp-panesContainer {
+        display: none;
+    }
+    #example {
+        float : right !important;
+    }
+
+
+
+</style>
+
+<div class="container" >
+    <div class="card p-5" >
+        <div id='error_message'>
+            {% include 'includes/alerts.html' %}
+           </div>
+        <h3 class="text-center">Add product</h3>
+        <hr class="hr-center">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6 mt-2">
+                    <label for="product_name">Product&nbsp;Name&nbsp;:</label>
+                </div>
+                <div class="col-md-6 mt-2">
+                    <input type="text" name="product_name" class="form-control" id="product_name" value="{{form.product_name.value | default_if_none:''}}" required>
+                    <span class="text-danger">{{form.errors.product_name}}</span>
+                </div>
+            </div>
+            <div class="row">
+            <div class="col-md-6 mt-2">
+                <label for="slug">Slug:</label>
+            </div>
+            <div class="col-md-6 mt-2">
+                <input type="text" name="slug" class="form-control" id="slug" value="{{form.slug.value  | default_if_none:''}}" required >
+                <span class="text-danger">{{form.errors.slug}}</span>
+            </div>
+        </div>
+
+
+        <div class="row">   
+        <div class="col-md-6 mt-2">
+            <label for="description">Product&nbsp;description&nbsp;:</label>
+        </div>
+        <div class="col-md-6 mt-2">
+            <input type="text" name="description" class="form-control" id="description" value="{{form.description.value  | default_if_none:''}}" required>
+            <span class="text-danger">{{form.errors.description}}</span>
+        </div>
+    </div>
+
+    <div class="row">
+    <div class="col-md-6 mt-2">
+        <label for="price">Price:</label>
+    </div>
+    <div class="col-md-6 mt-2">
+        <input type="number" name="price" class="form-control" id="price" value="{{form.price.value  | default_if_none:''}}" required>
+        {% if error %}
+        <span class="text-danger">{{error}}</span>
+
+        {% else %}
+        <span class="text-danger">{{form.errors.price}}</span>
+        {% endif %}
+    </div>
+    </div>
+
+    
+    <div class="row">   
+        <div class="col-md-6 mt-2">
+            <label for="mrp">MRP&nbsp;price&nbsp;:</label>
+        </div>
+        <div class="col-md-6 mt-2">
+            <input type="text" name="mrp" class="form-control" id="mrp" value="{{form.mrp.value  | default_if_none:'' }}" required>
+            <span class="text-danger">{{form.errors.mrp}}</span>
+        </div>
+    </div>
+
+        
+    <div class="row">   
+        <div class="col-md-6 mt-2">
+            <label for="brand">Brand&nbsp;&nbsp;:</label>
+        </div>
+        <div class="col-md-6 mt-2">
+            <input type="text" name="brand" class="form-control" id="brand" value="{{form.brand.value  | default_if_none:'' }}" required>
+            <span class="text-danger">{{form.errors.brand}}</span>
+        </div>
+    </div>
+
+     <div class="row">
+    <div class="col-md-6 mt-2">
+    <label for="stock">Stock:</label>
+     </div>
+     <div class="col-md-6 mt-2">
+    <input type="number" name="stock" class="form-control" id="stock" value="{{form.stock.value  | default_if_none:'' }}" required >
+    <span class="text-danger">{{form.errors.stock}}</span>
+    </div>
+    </div>
+    <div class="row">
+                <div class=" col-md-6 mt-2">
+                    <label for="asset_image">Product&nbsp;Image&nbsp;:</label>
+                </div>
+                <div class=" col-md-6 mt-2">
+                    <div id="voucher_image-holder" class="my-2 image-holder"></div>
+                    <input type="file" class="check__image-only" id="image" aria-describedby="emailHelp"
+                        onchange="onChangeFunction(event)" accept="image/*" name="images" required
+                        value="{{form.images.value}}"><span class="text-danger">{{form.errors.images}}</span>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mt-2">
+                    <label for="category">Category:</label>
+                </div>
+                <div class="col-md-6 mt-2">
+                    <select name="category" id="category" class="form-control" value="{{form.category.value}}" required>
+
+                        
+                        <option value="">------------------------</option>
+                        {% for i in x %}
+                        <option value="{{i.id}}">{{i.category_name}}</option>
+                      {% endfor %}
+                    </select>
+                    <span class="text-danger">{{form.errors.category}}</span>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mt-2">
+                    <label for="category">Supplier:</label>
+                </div>
+                <div class="col-md-6 mt-2">
+                    <select name="supplier" id="supplier" class="form-control" value="{{form.supplier.value}}" required>
+                        <option value="">------------------------</option>
+                        {% for i in supplier %}
+                        <option value="{{i.id}}">{{i.first_name}} </option>
+                      {% endfor %}
+                    </select>
+                    <span class="text-danger">{{form.errors.supplier}}</span>
+                </div>
+
+            </div>
+
+            
+    {% comment %} <div class="row">
+        <div class="col-md-6 mt-2">
+            <label for="brand">Brand:</label>
+        </div>
+        <div class="col-md-6 mt-2">
+            <input type="text" name="brand" class="form-control" id="brand" >
+            <span class="text-danger">{{form.errors.brand}}</span>
+        </div>
+        </div> {% endcomment %}
+
+            <hr class="hr-center">
+            <div class="mt-2 text-center">
+                <button type="submit" class="btn btn-outline-success">Save</button>
+                <button type="reset" class="btn btn-outline-danger">Cancel</button>
+            </div>
+        
+         
+            </form>
+        </div>
+    </div>
+
+ <div class="card p-5">
+        <h3 class="text-center">Products</h3>
+        <hr class="hr-center">
+        <form action="" method="post">
+            {% csrf_token %}
+        <div class="table-responsive">
+        <table id="example" class="table table-striped nowrap"  style="overflow-x:auto;width:100%;">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>product&nbsp;Name</th>
+                    <th>slug</th>
+                    <th>description </th>
+                    <th>price</th>
+                    <th>MRP</th>
+                    <th>brand</th>
+                    <th>Image</th>
+                    <th>category </th>
+                    <th>stock </th>
+                    <th>supplier </th>
+                    <th>Status </th>
+                    <th>Action </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in y %}
+                      <tr>
+                          <td>{{forloop.counter}}</td>
+                          <td>{{i.product_name}}</td>
+                          <td>{{i.slug}}</td>
+                          <td>{{i.description}}</td>  
+                          <td>{{i.price}}</td>
+                          <td>{{i.mrp}}</td>
+                          <td>{{i.brand}}</td>
+                          <td><input type="file"  accept="image/*" name="images" id="file"  onchange="loadFile(event)" style="display: none;">
+                          <img id="output" width="100" height="70" src="{{i.images.url}}"/></td>
+                          <td>{{i.category.category_name}}</td>
+                          <td>{{i.stock}}</td>
+                          <td>{{i.supplier.first_name}}</td>
+                          <td>
+                            {% if i.status %}
+                            <span style="color:green">Available</span> <br>
+            
+                            {% else %}
+                             <span style="color:red">Not available</span>
+                            
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if i.status %} 
+                            <a href="{% url 'product_disable' i.id  %}"> <i class="fa fa-shopping-cart p-2 text-danger"> </i></a>
+                             
+                              {% else %}
+                             
+                              
+                              <a href="{% url 'product_enable' i.id  %}"> <i class="fa fa-shopping-cart p-2 text-success"> </i></a>
+                               {% endif %}
+        
+                            
+                        </td>
+                          </tr>
+                      {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </form>
+    </div>
+
+
+
+
+{% endblock content %}
+
+

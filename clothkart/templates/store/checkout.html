@@ -1,0 +1,214 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+  .btnsa {
+    color: #000;
+    background-color: #ffd814;
+    border-radius: 15px;
+    padding: 6px 27%;
+    font-size: 15px;
+    border: none;
+    box-shadow: rgb(149 157 165 / 19%) 0px 8px 24px;
+  }
+
+  .btnsaa {
+    color: #000;
+    background-color: #ffa41c;
+    border-radius: 25px;
+    padding: 6px 23%;
+    font-size: 15px;
+    border: none;
+    box-shadow: rgb(149 157 165 / 19%) 0px 8px 24px;
+  }
+</style>
+{% comment %} <section class="section-content padding-y bg">
+  <div class="container">
+    <div class="row">
+      {% for i in address %}
+    <div class="col-lg-6">
+
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">{{i.first_name}} {{i.last_name}}</h5>
+        <p class="card-text">{{i.address_line_1}} , {{i.address_line_2}}</p>
+        <p class="card-text">{{i.city}} , {{i.state}},</p>
+        <p class="card-text">{{i.country}} , {{i.pincode}}</p>
+
+        <p class="card-text"> {{i.phone}}</p>
+
+     
+      </div>
+    </div>
+    </div>
+    {% endfor %}
+  </div>
+     
+  </div>
+</section> {% endcomment %}
+
+<section class="section-content padding-y bg">
+<div class="container">
+
+<!-- ============================ COMPONENT 1 ================================= -->
+
+<div class="row">
+  <aside class="col-lg-6">
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title mb-4">Billing Address</h4>
+     <form action="{% url 'place_order' %}" method="POST"> 
+      {% csrf_token %}
+      <div class="form-row">
+        <div class="col form-group">
+          <label for="">First Name</label>
+          <input type="text" name="first_name" class="form-control" value="{{form.first_name.value}}"  required >
+          <span class="text-danger">{{form.errors.first_name}}</span>
+        </div>
+        <div class="col form-group">
+          <label for="">Last Name</label>
+          <input type="text" name="last_name" class="form-control" value="{{form.last_name.value}}"  required>
+          <span class="text-danger">{{form.errors.last_name}}</span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col form-group">
+          <label for="">Email</label>
+          <input type="email" name="email" class="form-control" value="{{form.email.value}}"  required>
+          <span class="text-danger">{{form.errors.email}}</span>
+        </div>
+        <div class="col form-group">
+          <label for="">Phone Number</label>
+          <input onkeypress="return isNumberKey(event)" type="tel"  id="phone" name="phone"
+            class="form-control" value="{{form.phone.value  | default_if_none:'' }}" minlength="10" maxlength="10" required>
+          <span class="text-danger">{{form.errors.phone}}</span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col form-group">
+          <label for="">Address Line 1</label>
+          <input type="text" name="address_line_1" class="form-control" value="{{form.address_line_1.value}}"  required>
+          <span class="text-danger">{{form.errors.address_line_1}}</span>
+        </div>
+        <div class="col form-group">
+          <label for="">Address Line 2</label>
+          <input type="text" name="address_line_2" class="form-control" value="{{form.address_line_2.value}}" >
+          <span class="text-danger">{{form.errors.address_line_2}}</span>
+        </div>
+      </div>
+      <div class="form-row">
+       
+        <div class="col form-group">
+          <label for="">City</label>
+          <input type="text" name="city" class="form-control" value="{{form.city.value}}"  required>
+          <span class="text-danger">{{form.errors.city}}</span>
+        </div>
+        <div class="col form-group">
+          <label for="">District</label>
+          <input type="text" name="district" class="form-control" value="{{form.district.value}}"  required>
+          <span class="text-danger">{{form.errors.district}}</span>
+        </div>
+        <div class="col form-group">
+          <label for="">State</label>
+          <input type="text" name="state" class="form-control" value="{{form.state.value}}"  required>
+          <span class="text-danger">{{form.errors.state}}</span>
+        </div>
+        <div class="col form-group">
+          <label for="">Country</label>
+          <input type="text" name="country" class="form-control" value="{{form.country.value}}"  required>
+          <span class="text-danger">{{form.errors.country}}</span>
+        </div>
+        <div class="col form-group">
+          <label for="">Pincode</label>
+          <input onkeypress="return isNumberKey(event)" type="tel" class="form-control" name="pincode" value="{{form.pincode.value}}" minlength="6" maxlength="6" required>
+          <span class="text-danger">{{form.errors.pincode}}</span>
+        </div>
+        </div>
+        <div class="form-row">
+          <label for="">Order Note</label>
+          <textarea name="order_note" rows="2" class="form-control">{{form.order_note.value}}</textarea >
+            <span class="text-danger">{{form.errors.order_note}}</span>
+        </div>
+
+
+  </div>
+</div> <!-- card.// -->
+
+  </aside> <!-- col.// -->
+  <aside class="col-lg-6">
+
+    <div class="card">
+    <div class="card-body">
+      <table class="table table-borderless table-shopping-cart">
+      <thead class="text-muted">
+      <tr class="small text-uppercase">
+        <th scope="col">Product</th>
+        <th scope="col" width="120">Quantity</th>
+        <th scope="col" width="120">Price</th>
+
+      </tr>
+      </thead>
+      <tbody>
+
+      {% for cart_item in cart_items %}
+      <tr>
+        <td>
+          <figure class="itemside align-items-center">
+            <div class="aside"><img src="{{ cart_item.product.images.url }}" class="img-sm"></div>
+            <figcaption class="info">
+              <a href="{{ cart_item.product.get_url }}" class="title text-dark">{{ cart_item.product.product_name }}</a>
+              <p class="text-muted small">
+                {% if cart_item.variations.all %}
+                  {% for item in cart_item.variations.all %}
+                    {{ item.variation_category | capfirst }} : {{ item.variation_value | capfirst }} <br>
+                  {% endfor %}
+                {% endif %}
+              </p>
+            </figcaption>
+          </figure>
+        </td>
+        <td>
+          <!-- col.// -->
+              <label for="">{{cart_item.quantity}}</label>
+        </td>
+        <td>
+          <div class="price-wrap">
+            <var class="price">₹ {{ cart_item.sub_total }}</var>
+            <small class="text-muted"> ₹ {{ cart_item.product.price }} each </small>
+          </div> <!-- price-wrap .// -->
+        </td>
+
+      </tr>
+      {% endfor %}
+
+      </tbody>
+      </table>
+
+      {% comment %} <button type="submit" name="submit" class="btn btn-dark btn-block">Place Order</button>
+      <a href="{% url 'store' %}" class="btn  btn-block">Continue Shopping</a> {% endcomment %}
+
+<div class="text-center">
+      
+      <button class="btnsa" type="submit">Place Order</button>
+      <a href="{% url 'store'   %}"><div class="mt-2"><button class="btnsaa" type="submit">Continue shopping</button></div></a><br>
+    </div>
+      </form>
+    </div> <!-- card-body.// -->
+    </div> <!-- card.// -->
+
+
+</aside> <!-- col.// -->
+
+
+</div> <!-- row.// -->
+
+<!-- ============================ COMPONENT 1 END .// ================================= -->
+
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+{% endblock %}
+

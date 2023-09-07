@@ -1,0 +1,124 @@
+{% load static %}
+<style>
+  .section-header {
+ 
+    background-color: #2d2929;
+    width: 100%;
+    position: fixed;
+ margin-bottom: 140px !important;
+    z-index: 99; 
+ {% comment %} background: linear-gradient(145deg, rgba(244,244,244,1) 0%, rgb(63 77 172) 50%);  {% endcomment %}
+
+  
+  }
+  .icon{
+    transition: 0.5s;
+  }
+  .icon i{
+    transition: 0.5s;
+      }
+  .icon:hover{
+    border:2px solid red !important;
+  }
+  .icon:hover  i{
+color: red;
+  }
+</style>
+
+{% comment %} <div class="container-fluid"
+  style="text-align:center;background-image: linear-gradient(to right, #3167EB , #7A7A7A);padding:10px;font-weight: 600;position:sticky;top:0;z-index:999;">
+
+</div> {% endcomment %}
+
+  <header class="section-header">
+
+    <section class="header-main border-bottom">
+      <div class="container-fluid px-5">
+
+        <div class="row align-items-center">
+          <div class=" col-lg-2 mt-2 col-6">
+            <a href="{% url 'home' %}" class="brand-wrap">
+              <img class="logo" src="{% static './images/logo1.png' %}">
+            </a> <!-- brand-wrap.// -->
+          </div>
+          
+          {% comment %} <a href="{% url 'store' %}" class="btn btn-outline-light">Products</a> {% endcomment %}
+          <div class="  col-lg-4 mt-2 col-sm-12 ">
+            <form action="{% url 'search' %}" class="search" method='GET'>
+              <div class="input-group w-100">
+                <input type="text" class="form-control" style="width:60%;" placeholder="Search" name="keyword" required>
+
+                <div class="input-group-append">
+                  <button class="btn btn-dark" type="submit">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </div>
+              </div>
+            </form> <!-- search-wrap .end// -->
+          </div> <!-- col.// -->
+          <div class="col-lg-6 mt-2 col-sm-6  ">
+            <div class="d-flex justify-content-around mb-3 mb-lg-0">
+              {% if user.id is None %}
+              <div class="widget-header mt-3">
+                {% comment %} <small class="title text-light">Welcome guest!</small> {% endcomment %}
+                <div>
+                  <a href="{% url 'login' %}" class="text-light">Login</a> <span class="text-light"> | </span>
+                  <a href="{% url 'register' %}" class="text-light"> Register</a>
+                </div>
+              </div>
+              {% else %}
+              <div class="widget-header mt-3 ">
+                {% comment %} <small class="title text-white">Welcome {{user.first_name}}!</small> {% endcomment %}
+                <div>
+                 
+                  <a href="{% url 'dashboard' %}" class="text-light">My Account</a> <span class="text-light"> | </span>
+                  <a href="{% url 'logout' %}" class="text-light"> Logout</a>
+                </div>
+              </div>
+            
+              {% endif %}
+              {% if user.is_authenticated %}
+              <div class="widget-header mt-3 ">
+                <h5 class="title text-white">Welcome {{user.first_name}}!</h5> 
+              </div>
+              {% else %}
+              <div class="widget-header mt-3 ">
+                <h5 class="title text-white">Welcome Guest!</h5> 
+              </div>
+              {% endif %}
+              {% if user.username == "admin" %}
+              <a href="{% url 'staff_home' %}" class="text-light mt-3"> Admin Panel</a>
+              {% endif %}
+              <div>
+
+  {% if user.is_authenticated %}
+
+      <a href="{% url 'wishlist' %}" class="widget-header pl-3 ml-3 text-light">
+        <div class="icon icon-sm rounded-circle " style="border: 2px solid #fff;"><i class="fa fa-heart"></i></div>
+    {% endif  %}
+  </a>
+                <a href="{% url 'cart' %}" class="widget-header pl-3 ml-3 text-light">
+                  <div class="icon icon-sm rounded-circle " style="border: 2px solid #fff;"><i class="fa fa-shopping-cart"></i></div>
+                  <span class="badge badge-pill badge-danger notify">{{cart_count}}</span>
+                </a>
+           </div>
+              
+            </div>
+
+          </div>
+        </div>
+      </div>
+<br>
+<div class="second_nav">
+ <div >
+  <a class="px-2"  href="{% url 'store' %}">All products</a>
+  {% for category in links %}
+  <a class="px-2"  href="{{ category.get_url }}">{{ category.category_name }} </a>
+  {% endfor %}
+ </div>
+</div>
+
+
+</section>
+
+  </header>

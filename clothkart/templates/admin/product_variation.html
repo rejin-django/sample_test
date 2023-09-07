@@ -1,0 +1,154 @@
+{% extends 'admin/layout.html' %}
+{% load static %}
+{% block content%} 
+<style>
+    
+    .dtsp-panes, .dtsp-panesContainer {
+        display: none;
+    }
+    #example {
+        float : right !important;
+    }
+
+
+
+</style>
+
+
+<div class="container">
+    <div class="card p-5">
+       <div id='error_message'>
+        {% include 'includes/alerts.html' %}
+       </div>
+        <h3 class="text-center">Add product variation</h3>
+        <hr class="hr-center">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6 mt-2">
+                    <label for="product">Product:</label>
+                </div>
+                <div class="col-md-6 mt-2">
+                    <select name="product" id="product" class="form-control" value="{{form.product.value}}" required>
+
+
+                        
+                        <option value="">------------------------</option>
+                        {% for i in x %}
+                        <option value="{{i.id}}">{{i.product_name}}</option>
+                      {% endfor %}
+                    </select>
+                    <span class="text-danger">{{form.errors.product}}</span>
+                </div>
+            </div>
+            <div class="row">
+            <div class="col-md-6 mt-2">
+                <label for="variation_category">variation_category:</label>
+            </div>
+            <div class="col-md-6 mt-2">
+                <select name="variation_category" id="variation_category" class="form-control" value="{{form.variation_category.value}}" required>
+
+                    {% if variation_category %}
+                    <option value="{{variation_category}}" selected>{{variation_category}}</option>
+                    {% else %}
+                    <option disabled selected value>select variation</option>
+                    {% endif %}
+
+                    {% comment %} <option value="">------------------------</option> {% endcomment %}
+                    
+                    <option value="color">color</option>
+                    <option value="size">size</option>
+
+                
+                </select>
+                <span class="text-danger">{{form.errors.variation_category}}</span>
+            </div>
+        </div>
+
+
+        <div class="row">   
+        <div class="col-md-6 mt-2">
+            <label for="variation_value">variation_value&nbsp;:</label>
+        </div>
+        <div class="col-md-6 mt-2">
+            <input type="text" name="variation_value" class="form-control" id="variation_value" value="{{form.variation_value.value | default_if_none:''}}" >
+            <span class="text-danger">{{form.errors.variation_value}}</span>
+        </div>
+    </div>
+
+ 
+    
+            <hr class="hr-center">
+            <div class="mt-2 text-center">
+                <button type="submit" class="btn btn-outline-success">Save</button>
+                <button type="reset" class="btn btn-outline-danger">Cancel</button>
+            </div>
+        
+         
+            </form>
+        </div>
+
+        <div class="card p-5">
+          <h3 class="text-center">Products</h3>
+          <hr class="hr-center">
+      
+    
+           <div class="table-responsive">
+                <table id="example" class="table table-striped nowrap"  style="overflow-x:auto;width:100%;">
+                      <thead>
+                          <tr>
+                              <th>S.No</th>
+                              <th>product&nbsp;Name</th>
+                              <th>product&nbsp;Image</th>
+                              {% comment %} <th>variation_category</th>
+                              <th>variation_value</th>
+                              <th>Status </th> {% endcomment %}
+                              <th>View Variation </th>
+    
+                           
+      
+                          </tr>
+                        
+                      </thead>
+                      <tbody>
+                          {% for i in x %}
+                          <tr>
+                              <td>{{forloop.counter}}</td>
+                              <td>{{i.product_name}}</td>
+                              <td><input type="file"  accept="image/*" name="images" id="file"  onchange="loadFile(event)" style="display: none;">
+                                <img id="output" width="100" height="70" src="{{i.images.url}}"/></td>
+                              {% comment %} <td>{{i.variation_category}}</td>
+                              <td>{{i.variation_value}}</td>
+
+                              <td>
+                                {% if i.status %}
+                                <span style="color:green">Available</span> <br>
+                               
+                                {% else %}
+                                 <span style="color:red">Not available</span>
+                                
+                                {% endif %}
+                            </td> {% endcomment %}
+                            <td>
+                                {% comment %} {% if i.status %}  {% endcomment %}
+                                <a href="{% url 'view_variation' i.id  %}"> <button class="text-info">View</button></a>
+                                 
+                                  {% comment %} {% else %} {% endcomment %}
+                         
+                                  {% comment %} <a href="{% url 'product_variation_enable' i.id  %}"> <i class="fa fa-shopping-cart p-2 text-success"> </i></a> {% endcomment %}
+                                   {% comment %}{% endif %} {% endcomment %}     
+                            </td>
+                              </tr>
+                          {% endfor %}
+                      </tbody>
+                  </table>
+              </div>
+    
+      </div>
+    
+
+
+
+    </div>
+
+{% endblock content %}

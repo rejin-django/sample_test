@@ -1,0 +1,131 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content%} 
+<style>
+    
+.btnsavecustomer {
+    padding: 7px 20px;
+    background-color: #428712;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+  }
+  .btncancelcustomer {
+    padding: 7px 20px;
+    background-color: #f00;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+  }
+</style>
+
+
+<div class="container" >
+    <div class="float-right mt-2">
+        <a href="{% url 'home' %}" style="color: blue;"><b>Back to home</b></a>
+    </div><br>
+    <div class="card p-5 mt-5" style="background-color: #f3a847;box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;">
+
+        <div id='error_message'>
+            {% include 'includes/alerts.html' %}
+           </div>
+          
+        <h3 class="text-center"><i class="fas fa-headset"></i>&nbsp;<b>Customer Care</b></h3>
+        <hr class="hr-center">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row d-flex justify-content-center d-flex justify-content-center mb-2">
+                <div class="col-md-3 mt-2">
+                    <label for="name"><b>Customer &nbsp;Name&nbsp;:</b></label>
+                </div>
+                <div class="col-md-3 mt-2">
+                    <input type="text" name="name" class="form-control" placeholder="Enter Name" id="name" value="{{form.name.value | default_if_none:''}}" required>
+                    <span class="text-danger">{{form.errors.name}}</span>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center mb-2">
+            <div class="col-md-3 mt-2">
+                <label for="email"><b>Email Address :</b></label>
+            </div>
+            <div class="col-md-3 mt-2">
+                <input type="text" name="email" class="form-control" placeholder="Enter Email" id="email" value="{{form.email.value  | default_if_none:''}}" required >
+                <span class="text-danger">{{form.errors.email}}</span>
+            </div>
+        </div>
+
+
+        <div class="row d-flex justify-content-center mb-2">   
+        <div class="col-md-3 mt-2">
+            <label for="phone_number"><b>Phone Number</b>&nbsp;:</label>
+        </div>
+        <div class="col-md-3 mt-2">
+            <input type="text" name="phone_number" class="form-control" placeholder="Enter ph.no" id="phone_number" value="{{form.phone_number.value  | default_if_none:''}}" required>
+            <span class="text-danger">{{form.errors.phone_number}}</span>
+        </div>
+    </div>
+
+
+    
+    <div class="row d-flex justify-content-center mb-2">   
+        <div class="col-md-3 mt-2">
+            <label for="subject"><b>Queries :</b></label>
+        </div>
+        <div class="col-md-3 mt-2">
+            <input type="text" name="subject" class="form-control" placeholder="Enter Queries" id="subject" value="{{form.subject.value  | default_if_none:'' }}" required>
+            <span class="text-danger">{{form.errors.subject}}</span>
+        </div>
+    </div>
+
+        
+    <div class="row d-flex justify-content-center mb-2">   
+        <div class="col-md-3 mt-2">
+            <label for="reason"><b>Reason&nbsp;&nbsp;:</b></label>
+        </div>
+        <div class="col-md-3 mt-2">
+            <input type="text" name="reason" class="form-control" placeholder="Enter Reason" id="reason" value="{{form.reason.value  | default_if_none:'' }}" required>
+            <span class="text-danger">{{form.errors.reason}}</span>
+        </div>
+    </div>
+            <hr class="hr-center">
+            <div class="mt-2 text-center">
+                <button type="submit" class="btnsavecustomer ">Save</button>
+                <button type="reset" class="btncancelcustomer">Cancel</button>
+            </div>
+        
+         
+            </form>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row mt-5 p-5">
+            {% for i in y %}
+            <div class="col-md-4">
+                <div class="card mt-3">
+                    <div class="card-body" style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
+                      <h5 class="card-title"> Ticket Id : {{i.ticket}}</h5>
+                      {% comment %} <h6 class="card-subtitle mb-2 text-muted">{{i.user.first_name}}</h6> {% endcomment %}
+                      <p class="card-text text-danger"> {{i.subject}}</p>
+                      <p class="card-text text-danger">{{i.reason}}</p>
+                      {% if i.is_solve %}
+                      <p class="text-dark">solved</p>
+                     {% else %}
+                        <p class="text-dark">submitted</p>
+                     {% endif %}
+                    </div>
+                </div>
+            </div>  
+            {% endfor %}  
+         
+
+
+           
+         </div>
+         
+        </div>
+    </div>
+
+
+{% endblock content %}

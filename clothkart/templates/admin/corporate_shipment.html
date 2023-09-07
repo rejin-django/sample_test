@@ -1,0 +1,133 @@
+{% extends 'admin/layout.html' %}
+{% load static %}
+{% block content%} 
+<style>
+  .table {
+    border-color: #dee2e600;
+  }
+</style>
+
+<section class="section-content padding-y bg">
+<div class="container">
+
+  <div class="card">
+    <div class="card-body">
+      <div id='error_message'>
+        {% include 'includes/alerts.html' %}
+       </div>
+      <h4 class="card-title mb-4 text-center">DeliveryHub  Shipment</h4>
+      <br>
+      <br>
+
+      
+
+      <form  action="" method="POST" >
+          {% csrf_token %}
+        
+              
+         
+        
+          <div class="form-group d-flex align-items-center justify-content-center">
+
+
+            <table class="table" style="width: 50%;">
+              <tbody>
+                <tr>
+                  <th><label class="control-label"><b>State :</b>&nbsp;&nbsp;&nbsp;</label></th>
+                  <td> <input class="form-control col-md-8" type="text"  value="{{shipments.order.state}}" name="state" disabled />
+{% comment %} 
+                  <td>          <textarea class="form-control col-md-8"  name="location_status" required ></textarea> {% endcomment %}
+                  </td>
+              
+                </tr>
+                <tr>
+                  <th><label class="control-label"><b>District :</b>&nbsp;&nbsp;&nbsp;</label></th>
+                  <td> <input class="form-control col-md-8" type="text"  value="{{shipments.order.district}}" name="district" disabled />
+{% comment %} 
+                  <td>          <textarea class="form-control col-md-8"  name="location_status" required ></textarea> {% endcomment %}
+                  </td>
+              
+                </tr>
+
+
+{% comment %}                 
+                <tr>
+                  <th><label class="control-label"><b>State:</b>&nbsp;:&nbsp;&nbsp;</label></th>
+                  <td><select  class="form-control" name="state"  required>
+                    <option value="" >  ----------------------</option>
+                    {% for i in state %}
+                    <option value="{{i.state}}">{{i.state}}</option>
+                    {% endfor %}
+                  
+                  
+                  </select> </td>
+                </tr>
+                <tr>
+                  <th><label class="control-label"><b>District:</b>&nbsp;:&nbsp;&nbsp;</label></th>
+                  <td><select  class="form-control" name="district" required >
+                    <option value="" >  ----------------------</option>
+                    {% for i in district %}
+                    <option value="{{i.district}}">{{i.district}}</option>
+                    {% endfor %}
+                  
+                  
+                  </select> </td>
+                </tr> {% endcomment %}
+                <tr>
+                  <th><label class="control-label"><b>Delivery Hub Agent:</b>&nbsp;&nbsp;&nbsp;</label></th>
+                  <td><select  class="form-control" name="corporatesub_agent" required >
+                    <option value="" >  ----------------------</option >
+                    {% for i in corporate_agent %}
+                    <option value="{{i.agent_organization_name}}">{{i.agent_organization_name}}/{{i.city}}/{{i.district}}</option>
+                    {% endfor %}
+                  
+                  
+                  </select> </td>
+                </tr>
+                <tr>
+                  <th><label class="control-label"><b>Location status :</b>&nbsp;&nbsp;&nbsp;</label></th>
+                  <td>          <textarea class="form-control col-md-8"  name="location_status" required ></textarea>
+                  </td>
+                </tr>
+                <tr>
+                  <th><label class="control-label"><b>Shipping Date :</b>&nbsp;&nbsp;&nbsp;</label></th>
+                  <td>                    <input class="form-control col-md-12" type="date"  name="created_date" required  /><br><br>
+
+                  </td>
+                </tr>
+               
+                  
+                </tr>
+              </tbody>
+            </table>
+
+     
+     
+          </div> 
+          <span class="d-flex justify-content-center">
+            <button type="submit" name="submit" class="btn btn-dark btn-block">Submit</button>
+          </span>
+
+
+      
+     </form>
+  
+        
+  
+   
+        
+  
+  
+
+
+
+
+<!-- ============================ COMPONENT 1 END .// ================================= -->
+
+
+
+
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+{% endblock %}

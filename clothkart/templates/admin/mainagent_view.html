@@ -1,0 +1,150 @@
+{% extends 'admin/layout.html' %}
+{% load static %}
+{% block content%} 
+<style>
+    
+    .dtsp-panes, .dtsp-panesContainer {
+        display: none;
+    }
+    #example {
+        float : right !important;
+    }
+
+
+
+</style>
+
+
+<div class="container">
+<div class="card p-5">
+    <h3 class="text-center">MainAgent Order Details</h3>
+    <hr class="hr-center">
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <div class="table-responsive">
+            <table id="example" class="table table-striped nowrap"  style="overflow-x:auto;width:100%;">
+                <thead>
+                  
+                        <tr>
+                            {% comment %} <th rowspan="2">S.No</th>
+                            <th rowspan="2">Customer Name</th> {% endcomment %}
+                            <th rowspan="2">Order Number</th>
+                            <th rowspan="2">Phone Number</th>
+                            {% comment %} <th rowspan="2">Email</th> {% endcomment %}
+                            <th rowspan="2">Address</th>
+                            {% comment %} <th rowspan="2">Payment Method</th> {% endcomment %}
+                            {% comment %} <th rowspan="2">Order By</th> {% endcomment %}
+
+                            {% comment %} <th rowspan="2">Product Name</th>
+    
+                            <th rowspan="2">Product Image</th>
+    
+                           
+                            <th rowspan="2">Quantity</th> {% endcomment %}
+                            {% comment %} <th rowspan="2">View Variation</th> {% endcomment %}
+                            {% comment %} <th rowspan="2">Product Price </th> 
+                            <th rowspan="2">Tax </th>  {% endcomment %}
+                            <th rowspan="2">Total  </th> 
+                            <th rowspan="2">created at</th>
+                            <th rowspan="2">TrackID </th> 
+                            <th rowspan="2">Shipment  </th> 
+
+
+                        
+                        </tr>
+                      
+                   
+                  
+                </thead>
+                <tbody>
+                    {% for i in view %}
+                    <tr>
+                        {% comment %} <td>{{forloop.counter}}</td>
+                        <td>{{i.order.first_name}} {{i.order.last_name}}</td> {% endcomment %}
+                        <td>{{i.order.order_number}}</td>
+                        <td>{{i.order.phone}}</td>
+
+                        {% comment %} <td>{{i.order.email}}</td> {% endcomment %}
+                        <td>
+                            {{i.order.address_line_1}} {{i.order.address_line_2}}, 
+                            {{i.order.city}}, {{i.order.state}},  
+                            {{i.order.country}}, {{i.order.pincode}}  </td>
+
+                            {% comment %} <td>{{i.payment.payment_method}}</td> {% endcomment %}
+                            {% comment %} <td>{{i.user.first_name}}</td> {% endcomment %}
+
+                        {% comment %} <td>{{i.product.product_name}}</td> {% endcomment %}
+
+                        {% comment %} <td><input type="file"  accept="image/*" name="images" id="file"  onchange="loadFile(event)" style="display: none;">
+                            <img id="output" width="100" height="70" src="{{i.product.images.url}}"/> <br>
+                            {% for j in i.variations.all %}
+                            {{j.variation_category}} - {{j.variation_value}} 
+                            {% endfor %}</td>
+                      
+
+                        <td>{{i.quantity}}</td> {% endcomment %}
+                        
+                    
+                    {% comment %} <td>{{i.product_price}}</td>
+                    <td>{{i.tax}}</td> {% endcomment %}
+                    <td>{{i.total_price}}</td>
+                    <td>{{i.created_at.date}}</td>
+                    {% if i.shipment_id  %} 
+                    <td>Generated</td>
+                    {% else %}
+                    <td> <a href="{% url 'shipping_details' i.id  %}"> Generate TrackID</a></td> 
+                    {% endif %}
+                    
+                    
+                    <td> <a href="{% url 'mainagent_shipment' i.id %}" class="nav-item nav-link"  ><i class="fa-solid fa-plus me-2"></i>Shipment</a></td> 
+                  
+                    
+{% comment %}                     
+                    {% if i.is_sale_assigned  %} 
+
+
+                    <td>  Assigned to Courier Sale</td> 
+                    {% else %} 
+                    
+
+
+                    <td> <a href="{% url 'assigns_to' i.id  %}">Sales</a></td> 
+                    {% endif %} {% endcomment %}
+
+                    {% comment %} {% if i.is_receive_notified  %} 
+
+                    <td>  Received</td> 
+                    {% else %}
+
+                    <td> <a href="{% url 'notify' i.id  %}">Not yet Received</a></td> 
+                    {% endif %} {% endcomment %}
+{% comment %} 
+                 {% if i.salesman_id %} 
+                    <td>  Assigned </td> 
+                    {% else %} 
+                    <td> <a href="{% url 'assign_to' i.id  %}"> Assign to</a></td> 
+
+                  
+
+                  
+
+                    {% endif %}
+                    <td> <a href="{% url 'edit_assign_to' i.id  %}"> Edit</a></td>  {% endcomment %}
+
+                    {% endfor %}
+             
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+
+
+
+</div>
+
+{% endblock  %} 
+
+
+

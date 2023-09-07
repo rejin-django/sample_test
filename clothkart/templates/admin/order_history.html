@@ -1,0 +1,71 @@
+{% extends 'admin/layout.html' %}
+{% load static %}
+{% block content%} 
+<style>
+    
+    .dtsp-panes, .dtsp-panesContainer {
+        display: none;
+    }
+    #example {
+        float : right !important;
+    }
+
+
+
+</style>
+<div class="container">
+<div class="card p-5">
+    <h3 class="text-center">Order History</h3>
+    <hr class="hr-center">
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <div class="table-responsive"> 
+            <table id="example" class="table table-striped nowrap"  style="overflow-x:auto;width:100%;">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Customer Name</th>
+                        <th>Order number</th>
+                        <th>Phone_number</th>
+                        {% comment %} <th>Email</th> {% endcomment %}
+                        <th>Address </th> 
+                        <th>Order Total </th> 
+                        <th>View order product </th> 
+
+
+                    
+                    </tr>
+                  
+                </thead>
+                <tbody>
+                    {% for i in x %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.first_name}} {{i.last_name}}</td>
+                        <td>{{i.order_number}}</td>
+                        <td>{{i.phone}}</td>
+                        {% comment %} <td>{{i.email}}</td> {% endcomment %}
+                        <td>{{i.address_line_1}},{{i.address_line_2}}, 
+                        {{i.city}}, {{i.state}},
+                         {{i.country}},  
+                        {{i.pincode}}
+                    </td>
+                    <td>{{i.order_total}}</td>
+                    <td><button class="text-success"><a href="{% url 'view_ordered_product' i.id %}">view</a></button></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+
+
+
+</div>
+
+{% endblock content %} 
+
+
+

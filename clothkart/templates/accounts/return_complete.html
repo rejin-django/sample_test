@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+   .table {
+    border-color: #dee2e600;
+   } input {
+    border-radius: 5px !important;
+   }  .table td {
+    border-top: 0px solid #dee2e600 !important;
+} .table th, .table td {
+    border-top: 1px solid #dee2e600 !important;
+}
+</style>
+<section class="bg">
+ <div class="container d-flex justify-content-center">
+       <div class="return_final_box">
+        <table class="table mt-5 mb-5">
+               
+            <tbody>
+              <tr>
+                <th scope="row"><h6>Return Request created successfully :</h6></th>
+                <td>
+                    <span>Total refund amount</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><span class="text-success">Return ID : #{{return_obj.return_id}}</span></th>
+                <td>
+                    <span><b>₹ {{return_obj.order.product.price}}</b></span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><span class="text-info">Return has been initiated on {{return_obj.return_pickup_date}}</span></th>
+                <td>
+                    
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="row final-bg-accnt mb-5 d-flex justify-content-center align-items-center">
+            <span class="text-center m-3"><i class="fas fa-check-circle text-success"></i>&nbsp;<b>Return Request created successfully</b></span>
+            <div class="col-4 justify-content-center d-flex">
+                <input type="file"  accept="image/*" name="images" id="file"  onchange="loadFile(event)" style="display: none;">
+                <img id="output" width="100" height="70" src="{{return_obj.order.product.images.url}}"/>
+            </div>
+            <div class="col-8">
+                <h5>{{return_obj.order.product.product_name}}</h5>
+                <span class="text-muted">Address : {{return_obj.address_line_1}},{{return_obj.city}} , <br> {{return_obj.district}}, {{return_obj.state}}, <br> {{return_obj.country}}, {{return_obj.pincode}},  <br> {{return_obj.phone}}</span>
+            </div>
+            
+            <a href="{% url 'store' %}" class="d-grid mt-4">
+                <button class="btn btn-warning">Back to product</button>
+            </a>
+          </div>
+       </div>
+ </div>
+</section>
+ {% endblock content %}
+
+
+
+
+
+

@@ -1,0 +1,116 @@
+{% extends 'admin/layout.html' %}
+{% load static %}
+{% block content%} 
+<style>
+  .table {
+    border-color: #dee2e600;
+  }
+</style>
+
+<section class="section-content padding-y bg">
+<div class="container">
+
+  <div class="card">
+    <div class="card-body">
+      <div id='error_message'>
+        {% include 'includes/alerts.html' %}
+       </div>
+      <h4 class="card-title mb-4 text-center">Add Delivery Man</h4>
+      <br>
+      <br>
+
+     
+      <form  action="" method="POST" >
+          {% csrf_token %}
+       
+          <div class="form-group d-flex align-items-center justify-content-center">
+            <table class="table" style="width: 50%;">
+              <tbody>             
+            
+                
+                <tr>
+                  <th><label class="control-label"><b>Name:</b>&nbsp;&nbsp;&nbsp;</label></th>
+                  <td>  <input class="col-md-12" type="text"  name="salename"  / required><br><br>
+                    <span class="text-danger">{{form.errors.salename}}</span>
+
+                  </td>
+                </tr>
+              
+                <tr>
+                    <th><label class="control-label"><b>Age:</b>&nbsp;&nbsp;&nbsp;</label></th>
+                    <td>  <input class="col-md-12" type="text"  name="age"   /><br><br>
+                      <span class="text-danger">{{form.errors.age}}</span>
+  
+                    </td>
+                  </tr>
+                  <tr>
+                    <th><label class="control-label"><b>Address:</b>&nbsp;&nbsp;&nbsp;</label></th>
+                    <td>  <input class="col-md-12" type="text"  name="address"  /><br><br>
+                      <span class="text-danger">{{form.errors.address}}</span>
+  
+                    </td>
+                  </tr>
+                  <tr>
+                    <th><label class="control-label"><b>City:</b>&nbsp;&nbsp;&nbsp;</label></th>
+                    <td>  <input class="col-md-12" type="text"  name="city"  /><br><br>
+                      <span class="text-danger">{{form.errors.city}}</span>
+  
+                    </td>
+                  </tr>
+                  <tr>
+                    <th><label class="control-label"><b>Pincode:</b>&nbsp;&nbsp;&nbsp;</label></th>
+                    <td>  <input class="col-md-12" type="number"  name="pincode"  /><br><br>
+                      <span class="text-danger">{{form.errors.pincode}}</span>
+  
+                    </td>
+                  </tr>
+                  <tr>
+                    <th><label class="control-label"><b>District:</b>&nbsp;&nbsp;&nbsp;</label></th>
+                    <td>  <input class="col-md-12" type="text"  name="district"  /><br><br>
+                      <span class="text-danger">{{form.errors.district}}</span>
+  
+                    </td>
+                  </tr>
+                  
+            
+              </tbody>
+            </table>     
+     
+          </div> 
+          <span class="d-flex justify-content-center">
+            <button type="submit" name="submit" class="btn btn-dark btn-block">Submit</button>
+          </span>
+
+
+      
+     </form>
+  
+        
+  
+   
+        
+  
+  
+
+
+
+
+<!-- ============================ COMPONENT 1 END .// ================================= -->
+
+
+
+
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

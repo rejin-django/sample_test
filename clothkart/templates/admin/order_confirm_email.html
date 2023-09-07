@@ -1,0 +1,17 @@
+{% autoescape off %}
+
+Hi {{user.first_name}},
+
+YOUR ORDER HAS BEEN CONFIRMED
+
+Order Number: {{verify_order.order.order_number}}
+
+
+
+total amount : ₹ {{verify_order.total_price}}
+
+product : {{verify_order.product.product_name}}
+
+
+THANKYOU FOR YOUR ORDER !
+{% endautoescape %}

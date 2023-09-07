@@ -1,0 +1,119 @@
+{% extends 'admin/layout.html' %}
+{% load static %}
+{% block content%} 
+
+<style>
+    
+    .dtsp-panes, .dtsp-panesContainer {
+        display: none;
+    }
+    #example {
+        float : right !important;
+    }
+
+
+
+</style>
+<div class="container">
+<div class="card p-5">
+    <div id='error_message'>
+        {% include 'includes/alerts.html' %}
+       </div>
+    <h3 class="text-center">Verified Orders</h3>
+    <hr class="hr-center">
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <div class="table-responsive">
+            <table id="example" class="table table-striped nowrap"  style="overflow-x:auto;width:100%;">
+                <thead>
+                  
+                        <tr>
+                            {% comment %} <th >S.No</th>
+                            <th >Customer Name</th> {% endcomment %}
+                            <th >Order Number</th>
+                            <th >Phone Number</th>
+                          
+                            <th >Address</th>
+                            {% comment %} <th >Payment Method</th>
+                            <th >Order By</th> {% endcomment %}
+
+                            <th >Product Name</th>
+    
+                            <th >Product Image</th>
+    
+                           
+                            <th >Quantity</th>
+                        
+                            <th >Total price </th> 
+                     
+                            {% comment %} <th>cancel request</th> {% endcomment %}
+
+                           
+
+
+
+    
+                        
+                        </tr>
+                      
+                   
+                  
+                </thead>
+                <tbody>
+                    {% for i in admin_verified_order %}
+                    <tr>
+                        {% comment %} <td>{{forloop.counter}}</td>
+                        <td>{{i.order.first_name}} {{i.order.last_name}}</td> {% endcomment %}
+                        <td>{{i.order.order_number}}</td>
+                        <td>{{i.order.phone}}</td>
+
+                        <td> 
+                            {{i.order.address_line_1}} {{i.order.address_line_2}},
+                            {{i.order.city}}, {{i.order.state}},
+                            {{i.order.country}}, {{i.order.pincode}} <br> </td>
+
+                            {% comment %} <td>{{i.payment.payment_method}}</td>
+                            <td>{{i.user.first_name}}</td> {% endcomment %}
+
+                        <td>{{i.product.product_name}}</td>
+
+                        <td><input type="file"  accept="image/*" name="images" id="file"  onchange="loadFile(event)" style="display: none;">
+                            <img id="output" width="100" height="70" src="{{i.product.images.url}}"/> <br>
+                          {% for j in i.variations.all %}
+                       {{j.variation_category}} - {{j.variation_value}} 
+                       {% endfor %}</td>
+                      
+
+                        <td>{{i.quantity}}</td>
+                        
+                   
+                    <td>{{i.total_price}}</td>
+                 
+
+                    {% comment %} {% if i.cancel_status == "Cancelled" %}
+                    <td> Cancelled</td>
+                    {% elif i.cancel_request_admin == "Cancellation_requested_from_admin" %}
+                    <td> sent cancel request to supplier</td>
+                    {% else %}
+
+                    <td> <a href="{% url 'cancelled_order' i.id %}" class="nav-item nav-link"
+                                                           
+                        >Cancel</a></td>
+                    {% endif %} {% endcomment %}
+
+
+
+                    {% endfor %}
+             
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+
+
+
+</div>
+
+{% endblock  %} 

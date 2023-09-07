@@ -1,0 +1,119 @@
+{% extends 'admin/layout.html' %}
+{% load static %}
+{% block content%} 
+<div class="container">
+<div class="card p-5">
+    <h3 class="text-center">Agent Order Details</h3>
+    <hr class="hr-center">
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped text-center">
+                <thead>
+                  
+                        <tr>
+                            <th rowspan="2">S.No</th>
+                            <th rowspan="2">Customer Name</th>
+                            <th rowspan="2">Order Number</th>
+                            <th rowspan="2">Phone Number</th>
+                            <th rowspan="2">Email</th>
+                            <th rowspan="2">Address</th>
+                            <th rowspan="2">Payment Method</th>
+                            <th rowspan="2">Order By</th>
+
+                            <th rowspan="2">Product Name</th>
+    
+                            <th rowspan="2">Product Image</th>
+    
+                           
+                            <th rowspan="2">Quantity</th>
+                            <th rowspan="2">View Variation</th>
+                            <th rowspan="2">Product Price </th> 
+                            <th rowspan="2">Tax </th> 
+                            <th rowspan="2">Total  </th> 
+                            <th rowspan="2">created at</th>
+                          
+
+                           
+
+
+
+    
+                        
+                        </tr>
+                      
+                   
+                  
+                </thead>
+                <tbody>
+                    {% for i in order_product %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.order.first_name}} {{i.order.last_name}}</td>
+                        <td>{{i.order.order_number}}</td>
+                        <td>{{i.order.phone}}</td>
+
+                        <td>{{i.order.email}}</td>
+                        <td>{{i.order.first_name}} ,{{i.order.last_name}} <br>
+                            {{i.order.address_line_1}} {{i.order.address_line_2}} <br>
+                            {{i.order.city}} {{i.order.state}} <br> 
+                            {{i.order.country}} {{i.order.pincode}} <br> </td>
+
+                            <td>{{i.payment.payment_method}}</td>
+                            <td>{{i.user.first_name}}</td>
+
+                        <td>{{i.product.product_name}}</td>
+
+                        <td><input type="file"  accept="image/*" name="images" id="file"  onchange="loadFile(event)" style="display: none;">
+                            <img id="output" width="100" height="70" src="{{i.product.images.url}}"/></td>
+                      
+
+                        <td>{{i.quantity}}</td>
+                        
+                        <td>
+                        {% for j in i.variations.all %}
+                       {{j.variation_category}} - {{j.variation_value}} 
+                       {% endfor %}
+                    </td>
+                    <td>{{i.product_price}}</td>
+                    <td>{{i.tax}}</td>
+                    <td>{{i.total_price}}</td>
+                    <td>{{i.created_at}}</td>
+                    {% if x  %} 
+                    <td>{{order_track}}</td>
+                    {% else %}
+                    <td> <a href="{% url 'shipping_details' i.id  %}"> Generate TrackID</a></td> 
+                    {% endif %}
+                    <td> <a href="{% url 'corporate_shipment' i.id %}" class="nav-item nav-link"
+  ><i class="fa-solid fa-plus me-2"></i>Shipment</a></td> 
+
+{% comment %} 
+                 {% if i.salesman_id %} 
+                    <td>  Assigned </td> 
+                    {% else %} 
+                    <td> <a href="{% url 'assign_to' i.id  %}"> Assign to</a></td> 
+
+                  
+
+                  
+
+                    {% endif %}
+                    <td> <a href="{% url 'edit_assign_to' i.id  %}"> Edit</a></td>  {% endcomment %}
+
+                    {% endfor %}
+             
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+
+
+
+</div>
+
+{% endblock  %} 
+
+
+

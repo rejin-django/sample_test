@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<section class="section-content padding-y bg">
+<div class="container">
+
+<!-- ============================ COMPONENT 1 ================================= -->
+
+<div class="row">
+	<aside class="col-lg-6">
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title mb-4">Shipping Details</h4>
+   
+      <div class="form-row">
+        <div class="col form-group">
+           
+          <label>Name:  {{shipments.order.first_name}} {{shipments.order.last_name}}</label>
+         
+        
+        </div>
+       
+      
+        <div class="col form-group">
+            <label>Email:  {{shipments.order.email}} </label>
+        </div>
+    </div>
+        <div class="col form-group">
+            <label>Phone NUmber:  {{shipments.order.phone}} </label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col form-group">
+            <label>Source Address:  {{shipments.supplier.business_name}} <br> {{shipments.supplier.address_lin1}} <br> {{shipments.supplier.city}} <br> {{shipments.supplier.district}} <br> {{shipments.supplier.state}} <br> {{shipments.supplier.country}} <br> {{shipments.supplier.pincode}}   </label>
+
+        </div>
+        <div class="col form-group">
+            <label>Destination Address:  {{shipments.order.address_line_1}} <br> {{shipments.order.address_line_2}} <br>{{shipments.order.city}} <br>{{shipments.order.state}}<br> {{shipments.order.country}} <br>{{shipments.order.pincode}} </label>
+
+        
+        </div>
+        <div class="col form-group">
+            <label>Destination Address:  {{shipments.order.address_line_1}} <br> {{shipments.order.address_line_2}} <br>{{shipments.order.city}} <br>{{shipments.order.state}}<br> {{shipments.order.country}} <br>{{shipments.order.pincode}} </label>
+
+        
+        </div>
+        <div class="col form-group">
+            <label>Sending Date:  {{shipments.order.updated_at}} </label>
+
+        
+        </div>
+        <label>Product:  {{shipments.order.updated_at}} </label>
+      </div>
+      <label>Amount:  {{shipments.total_price}} </label>
+      <label>Payment mode:  {{shipments.payment.payment_method}} </label>
+      <label>Product:  {{shipments.product.product_name}} </label>
+      
+
+  
+  </div>
+</div> <!-- card.// -->
+
+	
+
+      <button type="submit" name="submit" class="btn btn-dark btn-block">Place Order</button>
+			<a href="{% url 'store' %}" class="btn btn-info btn-block">Continue Shopping</a>
+ 
+		</div> <!-- card-body.// -->
+		</div> <!-- card.// -->
+
+
+</aside> <!-- col.// -->
+
+
+</div> <!-- row.// -->
+
+<!-- ============================ COMPONENT 1 END .// ================================= -->
+
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+{% endblock %}

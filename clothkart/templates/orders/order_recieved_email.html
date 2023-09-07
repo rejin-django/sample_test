@@ -1,0 +1,12 @@
+{% autoescape off %}
+
+Hi {{user.first_name}},
+
+YOUR ORDER HAS BEEN RECIEVED
+
+Order Number: {{order.order_number}}
+
+
+
+total amount : ₹ {{order.order_total}}
+{% endautoescape %}

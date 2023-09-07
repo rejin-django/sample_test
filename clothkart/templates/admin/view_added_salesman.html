@@ -1,0 +1,71 @@
+{% extends 'admin/layout.html' %}
+{% load static %}
+{% block content%} 
+<div class="container">
+<div class="card p-5">
+    <h3 class="text-center">View DeliveryMan</h3>
+    <hr class="hr-center">
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped text-center">
+                <thead>
+                  
+                        <tr>
+                            
+                            <th rowspan="2">S.NO</th> 
+                            <th rowspan="2">Name</th> 
+
+
+                            <th rowspan="2">Age</th> 
+                            <th rowspan="2">Address</th> 
+                            {% comment %} <th rowspan="2">Status</th>  {% endcomment %}
+
+                            
+
+
+                        </tr>
+                 
+                </thead>
+                <tbody>
+                    {% for i in view %}
+                    <tr>
+                     <td>{{forloop.counter}}</td>
+                       
+                            <td>{{i.salename}}</td>
+                    <td> {{i.age}}</td> 
+
+                        <td>{{i.address}}</td>
+
+                    
+
+                  
+
+                    
+            
+
+
+                    
+
+
+                  
+                    
+               
+
+                    {% endfor %}
+             
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+
+
+
+</div>
+
+{% endblock  %} 
+
+
+

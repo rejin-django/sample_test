@@ -1,0 +1,77 @@
+{% extends 'admin/layout.html' %}
+{% load static %}
+{% block content%} 
+
+
+<section class="section-content padding-y bg">
+<div class="container">
+
+<!-- ============================ COMPONENT 1 ================================= -->
+
+<div class="row">
+	<aside class="col-lg-6">
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title mb-4">Supplier Shipment</h4>
+    <form  action="" method="POST" >
+        {% csrf_token %}
+        <div class="form-group col-md-12">
+            <br><label class="control-label col-md-4">Corporate Agent : </label>
+            <select  class="form-control" name="corporateID"  >
+                <option value="" >  ----------------------</option>
+                {% for i in corporate_agent %}
+                <option value="{{i.id}}">{{i.agent_organization_name}}</option>
+                {% endfor %}
+              
+              
+              </select> 
+            
+        </div>
+       <div class="form-group col-md-12">
+           <br><label class="control-label col-md-4">Source Address : </label>
+           <textarea class="form-control col-md-8"  name="source_address"  ></textarea>
+           
+       </div>    
+       <div class="form-group col-md-12">
+           <br><label class="control-label col-md-4">Destination Address : </label>
+           <textarea class="form-control col-md-8"  name="destination_address"  ></textarea>
+       </div>   
+       <div class="form-group col-md-12">
+           <br><label class="control-label col-md-4">Phone Number : </label>
+           <input class="col-md-8" type="number"  name="phone_number"   /><br><br>
+       </div>
+       
+    <div class="form-group col-md-12">
+        <br><label class="control-label col-md-4">Sending Date : </label>
+        <input class="col-md-8" type="date"  name="sending_date"   /><br><br>
+    </div>
+    <button type="submit" name="submit" class="btn btn-dark btn-block">Submit</button>
+    {% comment %} <a href="{% url 'store' %}" class="btn btn-info btn-block">Continue Shopping</a> {% endcomment %}
+    
+   </form>
+
+      
+
+ 
+      
+
+  
+  </div>
+</div> <!-- card.// -->
+
+	
+
+      
+ 
+		<!-- col.// -->
+
+
+</div> <!-- row.// -->
+
+<!-- ============================ COMPONENT 1 END .// ================================= -->
+
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+{% endblock %}

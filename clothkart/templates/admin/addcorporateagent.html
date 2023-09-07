@@ -1,0 +1,181 @@
+{% extends 'admin/layout.html' %}
+{% load static %}
+{% block content%} 
+
+
+
+
+
+
+        
+<div class="container">
+    <div class="card p-5">
+        {% include 'includes/alerts.html' %}
+        <h3 class="text-center">Delivery Hub Agent</h3>
+        <hr class="hr-center">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+
+
+
+            <div class="row">
+                <div class="col-md-6 mt-2">
+                    <label for="first_name">First Name:</label>
+                </div>
+                <div class="col-md-6 mt-2">
+                    <input type="text" name="first_name" class="form-control" id="first_name" value="{{form.first_name.value | default_if_none:''}}" required>
+                    <span class="text-danger">{{form.errors.first_name}}</span>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-6 mt-2">
+                    <label for="last_name">Last Name:</label>
+                </div>
+                <div class="col-md-6 mt-2">
+                    <input type="text" name="last_name" class="form-control" id="last_name" value="{{form.last_name.value | default_if_none:''}}" required>
+                    <span class="text-danger">{{form.errors.last_name}}</span>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-6 mt-2">
+                    <label for="useranme"> Username :</label>
+                </div>
+                <div class="col-md-6 mt-2">
+                    <input type="text" name="username" class="form-control" id="username" value="{{form.username.value | default_if_none:''}}" required>
+                    <span class="text-danger">{{form.errors.username}}</span>
+                </div>
+            </div>
+
+
+
+            
+            <div class="row">
+            <div class="col-md-6 mt-2">
+                <label for="email">Email:</label>
+            </div>
+            <div class="col-md-6 mt-2">
+                <input type="email" name="email" class="form-control" id="email" value="{{form.email.value  | default_if_none:''}}" required>
+                {% if error %}
+                <span class="text-danger">{{error}}</span>
+                {% else %}
+                <span class="text-danger">{{form.errors.email}}</span>
+                {% endif %}
+            </div>
+        </div>
+
+
+        <div class="row">   
+        <div class="col-md-6 mt-2">
+            <label for="phone_number">Phone number&nbsp;:</label>
+        </div>
+        <div class="col-md-6 mt-2">
+            <input onkeypress="return isNumberKey(event)" type="tel"  id="phone_number" name="phone_number"
+            class="form-control" value="{{form.phone_number.value  | default_if_none:'' }}" minlength="10" maxlength="10" required>
+        </div>
+    </div>
+
+    <div class="row">   
+        <div class="col-md-6 mt-2">
+            <label for="business_name">Business Name&nbsp;:</label>
+        </div>
+        <div class="col-md-6 mt-2">
+            <input type="text" name="business_name" class="form-control" id="business_name"  value="{{form.business_name.value  | default_if_none:''}}" required>
+            <span class="text-danger">{{form.errors.business_name}}</span>
+        </div>
+    </div>
+
+    {% comment %} <div class="row">   
+        <div class="col-md-6 mt-2">
+            <label for="address_lin1">Address line &nbsp;:</label>
+        </div>
+        <div class="col-md-6 mt-2">
+            <input type="text" name="address_line" class="form-control" id="address_line" value="{{form.address_line.value  | default_if_none:''}}" required>
+            <span class="text-danger">{{form.errors.address_line}}</span>
+        </div>
+    </div>  {% endcomment %}
+
+    {% comment %} <div class="row">   
+        <div class="col-md-6 mt-2">
+            <label for="address_lin2">Address line&nbsp;:</label>
+        </div>
+        <div class="col-md-6 mt-2">
+            <input type="text" name="address_lin2" class="form-control" id="address_lin2" value="{{form.address_lin2.value  | default_if_none:''}}" >
+            <span class="text-danger">{{form.errors.address_lin2}}</span>
+        </div>
+    </div> {% endcomment %}
+
+    {% comment %} <div class="row">   
+        <div class="col-md-6 mt-2">
+            <label for="city">City&nbsp;:</label>
+        </div>
+        <div class="col-md-6 mt-2">
+            <input type="text" name="city" class="form-control" id="city" value="{{form.city.value  | default_if_none:''}}">
+            <span class="text-danger">{{form.errors.city}}</span>
+        </div>
+    </div> {% endcomment %}
+
+    <div class="row">   
+        <div class="col-md-6 mt-2">
+            <label for="district">District&nbsp;:</label>
+        </div>
+        <div class="col-md-6 mt-2">
+            <input type="text" name="district" class="form-control" id="district" value="{{form.district.value  | default_if_none:''}}" required>
+            <span class="text-danger">{{form.errors.district}}</span>
+        </div>
+    </div>
+
+    <div class="row">   
+        <div class="col-md-6 mt-2">
+            <label for="state">State&nbsp;:</label>
+        </div>
+        <div class="col-md-6 mt-2">
+            <input type="text" name="state" class="form-control" id="state" value="{{form.state.value  | default_if_none:''}}" required>
+            <span class="text-danger">{{form.errors.state}}</span>
+        </div>
+    </div>
+
+    {% comment %} <div class="row">   
+        <div class="col-md-6 mt-2">
+            <label for="country">Country&nbsp;:</label>
+        </div>
+        <div class="col-md-6 mt-2">
+            <input type="text" name="country" class="form-control" id="country" value="{{form.country.value  | default_if_none:''}}" >
+            <span class="text-danger">{{form.errors.country}}</span>
+        </div>
+    </div> {% endcomment %}
+
+    {% comment %} <div class="row">   
+        <div class="col-md-6 mt-2">
+            <label for="pincode">Pincode&nbsp;:</label>
+        </div>
+        <div class="col-md-6 mt-2">
+            <input type="text" name="pincode" class="form-control" id="pincode" value="{{form.pincode.value  | default_if_none:''}}">
+            <span class="text-danger">{{form.errors.pincode}}</span>
+        </div>
+    </div> {% endcomment %}
+ 
+    
+            <hr class="hr-center">
+            <div class="mt-2 text-center">
+                <button type="submit" class="btn btn-outline-success">Save</button>
+                <button type="reset" class="btn btn-outline-danger">Cancel</button>
+            </div>
+        
+         
+            </form>
+        </div>
+
+        
+      </div>
+    
+
+
+
+    </div>
+
+{% endblock content %}

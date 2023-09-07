@@ -1,0 +1,412 @@
+{% load static%}
+{% load active_link_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DashBoard</title>
+
+    <!-- Icon Font Stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link href="{% static 'css/datatablestyle.css' %}" rel="stylesheet" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <!-- Customized Bootstrap Stylesheet -->
+  
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+
+  </head>
+  <style>
+    .sidebar_admn a{
+      padding: 8px 17px;
+      margin-bottom: 5px;
+      color: #fff;
+      font-weight: 500;
+      border-left: 5px solid #1a6574;
+      border-radius: 0;
+      margin-left: 0;
+      outline: none;
+      transition: 0.5s;
+  }
+  .sidebar_admn a:hover {
+    padding: 8px 17px;
+    margin-bottom: 5px;
+    background-color: #f2f0f0;
+    color: #000;
+    font-weight: 500;
+    border-left: 5px solid #1a6574;
+    border-radius: 0;
+    margin-left: 0;
+    outline: none;
+    transition: 0.5s;
+} 
+.sidebar_admn a.active {
+  padding: 8px 17px;
+  margin-bottom: 5px;
+  background-color: #f2f0f0;
+  color: #000;
+  font-weight: 500;
+  border-left: 5px solid #1a6574;
+  border-radius: 0;
+  margin-left: 0;
+  outline: none;
+  transition: 0.5s;
+}
+.sidebar_admn i {
+  background-color: #fff;
+  border-radius: 20px;
+  color: #000;
+  padding: 12px;
+}
+</style>
+  <body>
+    <div class="sidebar pe-4 pb-3">
+      <nav class="navbar bg-light navbar-light">
+        {% comment %} <a href="{% url 'staff_home' %}" class="navbar-brand mx-4 mb-3">
+         <img src="{% static 'images/logo1.png' %}" alt="logo" style="width:100%">
+        </a> {% endcomment %}
+          <!-- <div class="nav-item dropdown">
+            <a
+              href="#"
+              class="nav-link dropdown-toggle"
+              data-bs-toggle="dropdown"
+              ><i class="fa fa-laptop me-2"></i>Elements</a
+            >
+            <div class="dropdown-menu bg-transparent border-0">
+              <a href="button.html" class="dropdown-item">Buttons</a>
+              <a href="typography.html" class="dropdown-item">Typography</a>
+              <a href="element.html" class="dropdown-item">Other Elements</a>
+            </div>
+          </div> -->
+           <div class="sidebar_admn"> 
+            <a href="{% url 'home' %}" class="{% active_link 'view_added_corporateagent'  %} nav-item nav-link"
+              ><i class="fa-solid fa-plus me-2"></i>Home page</a
+            >
+            </div>
+          {% if user.roll == "admin" %}
+ <div class="navbar-nav w-100">
+          {% comment %} <a href="{% url 'staff_home' %}" class="{% active_link 'staff_home' %} nav-item nav-link"
+            ><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a
+      
+         {% endcomment %}
+
+ 
+         
+          <a href="{% url 'add_product' %}" class="{% active_link 'add_product'  %} nav-item nav-link"
+            ><i class="fa-solid fa-plus me-2"></i>Add Product</a
+          >
+
+          <a href="{% url 'add_category' %}" class="{% active_link 'add_category'  %} nav-item nav-link"
+          ><i class="fa-solid fa-plus me-2"></i>Add Category</a
+        >
+
+        <a href="{% url 'add_product_variation' %}" class="{% active_link 'add_product_variation'  %} nav-item nav-link"
+        ><i class="fa-solid fa-plus me-2"></i>Productvariation</a
+      >
+      <a href="{% url 'add_product_gallery' %}" class="{% active_link 'add_product_gallery'  %} nav-item nav-link"
+      ><i class="fa-solid fa-plus me-2"></i>Productgallery</a
+    >
+
+    <a href="{% url 'about_product' %}" class="{% active_link 'about_product'  %} nav-item nav-link"
+    ><i class="fa-solid fa-plus me-2"></i>Product description</a
+  >
+
+
+    <a href="{% url 'add_supplier' %}" class="{% active_link 'add_supplier'  %} nav-item nav-link"
+    ><i class="fa-solid fa-plus me-2"></i>Add Supplier</a
+  >
+  <a href="{% url 'view_supplier' %}" class="{% active_link 'view_supplier'  %} nav-item nav-link"
+  ><i class="fa-solid fa-plus me-2"></i>View Supplier</a
+>
+
+<a href="{% url 'customer_queries' %}" class="{% active_link 'customer_queries'  %} nav-item nav-link"
+><i class="fa-solid fa-plus me-2"></i>Customer Queries</a
+>
+<a href="{% url 'order_history_admin' %}" class="{% active_link 'order_history_admin'  %} nav-item nav-link"
+  ><i class="fa-solid fa-plus me-2"></i>Order History</a
+>
+
+
+<a href="{% url 'supplier_confirmed_admin_view' %}" class="{% active_link 'supplier_confirmed_admin_view'  %} nav-item nav-link"
+  ><i class="fa-solid fa-plus me-2"></i>Supplier confirmed Orders</a
+>
+
+<a href="{% url 'admin_verified_orders' %}" class="{% active_link 'admin_verified_orders'  %} nav-item nav-link"
+  ><i class="fa-solid fa-plus me-2"></i>Verified Orders</a
+>
+<a href="{% url 'admin_return_request' %}" class="{% active_link 'admin_return_request'  %} nav-item nav-link"
+  ><i class="fa-solid fa-plus me-2"></i>Admin return detail</a
+
+
+>
+<a href="{% url 'cancel_requested_orders' %}" class="{% active_link 'cancel_requested_orders'  %} nav-item nav-link"
+  ><i class="fa-solid fa-plus me-2"></i>User Cancel Requested Orders </a
+>
+
+<a href="{% url 'supplier_cancelled_admin_view' %}" class="{% active_link 'supplier_cancelled_admin_view'  %} nav-item nav-link"
+  ><i class="fa-solid fa-plus me-2"></i>Supplier Cancelled Orders</a
+>
+
+
+
+{% comment %} <a href="{% url 'supplier_return_request' %}" class="{% active_link 'staff_home'  %}"
+  ><i class="fa-solid fa-plus me-2"></i>Supplier return detail</a
+>
+
+ <a href="{% url 'return_complete_supplier' %}" class="{% active_link 'staff_home'  %}"
+  ><i class="fa-solid fa-plus me-2"></i>Supplier return complete detail</a
+>
+
+<a href="{% url 'refund_initiate_supplier' %}" class="{% active_link 'staff_home'  %}"
+  ><i class="fa-solid fa-plus me-2"></i>Refund initiate products</a
+>
+
+<a href="{% url 'return_refund_complete' %}" class="{% active_link 'staff_home'  %}"
+  ><i class="fa-solid fa-plus me-2"></i>Supplier refund complete detail</a
+> {% endcomment %}
+
+{% endif %}
+
+{% if user.roll == "supplier" %}
+<div class="navbar-nav w-100">
+  {% comment %} <a href="{% url 'staff_home' %}" class="nav-item nav-link"
+    ><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a
+  > {% endcomment %}
+
+
+  <a href="{% url 'view_supplier_order_detail' %}" class="{% active_link 'view_supplier_order_detail'  %} nav-item nav-link"
+  ><i class="fa-solid fa-plus me-2"></i>Order detail of Supplier</a
+  >
+
+
+<a href="{% url 'supplier_confirm_order_detail' %}" class="{% active_link 'supplier_confirm_order_detail'  %} nav-item nav-link"
+><i class="fa-solid fa-plus me-2"></i>Supplier Confirmed orders</a
+>
+
+<a href="{% url 'admin_verified_supplier_orders' %}" class="{% active_link 'admin_verified_supplier_orders'  %} nav-item nav-link"
+  ><i class="fa-solid fa-plus me-2"></i>Admin verify shipped order</a
+>
+
+<a href="{% url 'supplier_return_request' %}" class="{% active_link 'supplier_return_request'  %} nav-item nav-link"
+><i class="fa-solid fa-plus me-2"></i>Supplier return detail</a
+>
+
+<a href="{% url 'return_complete_supplier' %}" class="{% active_link 'return_complete_supplier'  %} nav-item nav-link"
+><i class="fa-solid fa-plus me-2"></i>Supplier return complete detail</a
+>
+
+<a href="{% url 'refund_initiate_supplier' %}" class="{% active_link 'refund_initiate_supplier'  %} nav-item nav-link"
+><i class="fa-solid fa-plus me-2"></i>Refund initiate products</a
+>
+
+<a href="{% url 'return_refund_complete' %}" class="{% active_link 'return_refund_complete'  %} nav-item nav-link"
+><i class="fa-solid fa-plus me-2"></i>Supplier refund complete detail</a
+>
+{% comment %} <a href="{% url 'return_complete_supplier' %}" class="nav-item nav-link"
+  ><i class="fa-solid fa-plus me-2"></i>Supplier return complete detail</a
+> {% endcomment %}
+<a href="{% url 'add_mainagent' %}" class="{% active_link 'add_mainagent'  %} nav-item nav-link"
+><i class="fa-solid fa-plus me-2"></i>Add Mainagent</a
+>
+<a href="{% url 'cancel_request_from_admin' %}" class="{% active_link 'cancel_request_from_admin'  %} nav-item nav-link"
+  ><i class="fa-solid fa-plus me-2"></i>Cancel Request from admin</a
+>
+ <a href="{% url 'view_added_mainagent' %}" class="{% active_link 'view_added_mainagent'  %} nav-item nav-link"
+  ><i class="fa-solid fa-plus me-2"></i>View MainAgent</a
+> 
+<a href="{% url 'add_state' %}" class="{% active_link 'add_state'  %} nav-item nav-link"
+><i class="fa-solid fa-plus me-2"></i>Add State</a
+>
+<a href="{% url 'add_district' %}" class="{% active_link 'add_district'  %} nav-item nav-link"
+><i class="fa-solid fa-plus me-2"></i>Add District</a
+>
+
+{% endif %}
+{% comment %} <a href="{% url 'supplier_confirmed_admin_view' %}" class="{% active_link 'staff_home'  %}"
+><i class="fa-solid fa-plus me-2"></i>Supplier confirmed Admin view</a
+>
+<a href="{% url 'supplier_cancelled_admin_view' %}" class="{% active_link 'staff_home'  %}"
+><i class="fa-solid fa-plus me-2"></i>Supplier Cancelled Admin view</a
+> {% endcomment %}
+
+
+{% if user.roll == "mainagent" %}
+
+<div class="sidebar_admn"> 
+ 
+    <a href="{% url 'addcorporateagent' %}" class="{% active_link 'addcorporateagent'  %} nav-item nav-link"
+><i class="fa-solid fa-plus me-2"></i>Add DeliveryHubAgent</a
+>
+ 
+<a href="{% url 'mainagent_view' %}" class="{% active_link 'mainagent_view'  %} nav-item nav-link"
+><i class="fa-solid fa-plus me-2"></i>MainAgent View</a
+>
+
+
+
+<a href="{% url 'view_added_corporateagent' %}" class="{% active_link 'view_added_corporateagent'  %} nav-item nav-link"
+  ><i class="fa-solid fa-plus me-2"></i>View Delivery Hub Agent</a
+>
+</div>
+{% endif %}
+
+{% if user.roll == "subagent" %}
+<div class="sidebar_admn"> 
+<a href="{% url 'corporateagent_view' %}" class="{% active_link 'corporateagent_view'  %} nav-item nav-link"
+><i class="fa-solid fa-plus me-2"></i>Delivery Hub Agent View</a
+>
+<a href="{% url 'add_salesman' %}" class="{% active_link 'add_salesman'  %} nav-item nav-link"
+><i class="fa-solid fa-plus me-2"></i>Add Delivery Man</a
+>
+
+<a href="{% url 'view_added_salesman' %}" class="{% active_link 'view_added_salesman'  %} nav-item nav-link"
+  ><i class="fa-solid fa-plus me-2"></i>View Delivery Man</a
+>
+</div>
+{% endif %}
+
+{% comment %} <a href="{% url 'admin_return_request' %}" class="{% active_link 'staff_home'  %}"
+><i class="fa-solid fa-plus me-2"></i>Admin return detail</a
+> {% endcomment %}
+
+
+
+
+
+
+        </div>
+      </nav>
+    </div>
+    <!-- Sidebar End -->
+
+    <!-- Content Start -->
+    <div class="content">
+      <!-- Navbar Start -->
+      <nav
+        class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0"
+      >
+        <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+          <h2 class="text-light mb-0">Ideaux</h2>
+        </a>
+        <a href="#" class="sidebar-toggler text-dark flex-shrink-0">
+          <i class="fa fa-bars"></i>
+        </a>
+        <!-- <form class="d-none d-md-flex ms-4">
+          <input
+            class="form-control border-0"
+            type="search"
+            placeholder="Search"
+          />
+        </form> -->
+        <div class="navbar-nav align-items-center ms-auto">
+          <div class="nav-item dropdown ">
+            <a
+              href="#"
+              class="nav-link dropdown-toggle text-light"
+              data-bs-toggle="dropdown"
+            >
+
+              <i class="fa-solid fa-user text-dark"></i>
+              <span class="d-none d-lg-inline-flex">Welcome {{user.first_name}} <br> login as {{user.roll}} </span>
+            </a>
+            <div
+              class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0"
+            >
+              <a href="{% url 'logout' %}" class="dropdown-item ">Log Out</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {% block content %}
+
+      {% endblock content %}
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+      <!-- custom javascript -->
+      <script src="{% static 'js/script.js' %}" type="text/javascript"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="{% static 'js/jquery-3.3.1.min.js' %}" type="text/javascript"></script>
+      
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+      <!-- PayPal Script -->
+      <script src="https://www.paypal.com/sdk/js?client-id=AVBSMqNtoZ1IUO6lrSe6-vm9AIV1ZKN8CgXu_nINRs80xELRs650mh3yR62groIUg-GCe59Od_EFOG6O&currency=USD"></script>
+      
+      <script type="text/javascript">
+      /// some script
+      
+      // jquery ready start
+      $(document).ready(function() {
+        // jQuery code
+      
+      });
+      // jquery end
+      </script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script>
+        $(document).ready(function(){
+          $('.thumb a').click(function(e){
+            e.preventDefault();
+            $('.mainImage img').attr('src', $(this).attr("href"));
+          })
+        })
+      </script> 
+      <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+      <!-- Template Javascript -->
+      <script src="{% static 'js/main.js' %}"></script>
+  
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script>
+        $(document).ready(function(){
+        
+          let closeDown = ()=>{
+            $('#error_message').css('display','none')
+          }
+          setTimeout(closeDown, 5000)
+        })
+      </script>
+
+ <!--==========Datatable script==============-->
+ <script src="https://cdn.datatables.net/select/1.5.0/css/select.bootstrap5.min.css"></script>
+ <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+ <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+ <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+ <script src="https://cdn.datatables.net/searchpanes/2.1.0/js/dataTables.searchPanes.min.js"></script>
+ <script src="https://cdn.datatables.net/searchpanes/2.1.0/js/searchPanes.bootstrap5.min.js"></script>
+ <script src="https://cdn.datatables.net/select/1.5.0/js/dataTables.select.min.js"></script>
+ <script>
+   $(document).ready(function() {
+ var table = $('#example').DataTable({
+     searchPanes: true
+ });
+ table.searchPanes.container().prependTo(table.table().container());
+ table.searchPanes.resizePanes();
+});
+ </script>
+
+ 
+
+
+
+
+      
+
+    </body>
+    </html>
+    

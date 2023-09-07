@@ -1,0 +1,80 @@
+{% extends 'admin/layout.html' %}
+{% load static %}
+{% block content%} 
+<style>
+    
+    .dtsp-panes, .dtsp-panesContainer {
+        display: none;
+    }
+    #example {
+        float : right !important;
+    }
+
+
+
+</style>
+<div class="container">
+<div class="card p-5">
+    <h3 class="text-center">View supplier</h3>
+    <hr class="hr-center">
+    <form action="" method="post">
+        {% csrf_token %}
+
+       <div class="table-responsive">
+            <table id="example" class="table table-striped nowrap"  style="overflow-x:auto;width:100%;">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Supplier &nbsp;Name</th>
+                        <th> Username</th>
+
+                        <th>Email&nbsp;</th>
+                        <th>Phone_number</th>
+                        <th>Business name</th>
+                        <th>Address </th> 
+                        <th>Action </th> 
+
+                    
+                    </tr>
+                  
+                </thead>
+                <tbody>
+                    {% for i in x %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.first_name}} {{i.last_name}}</td>
+                        <td>{{i.username}}</td>
+
+                        <td>{{i.email}}</td>
+                        <td>{{i.phone_number}}</td>
+                        <td>{{i.business_name}}</td>
+                        <td>{{i.address_lin1}},{{i.address_lin2}} ,
+                        {{i.city}},   <br>{{district}}
+                        {{i.state}}, {{country}}  <br>
+                        {{i.pincode}}
+                    </td>
+
+
+                        
+
+                    <td> <a href="{% url 'edit_supplier' i.id  %}"><i class="fa-solid fa-pen-to-square p-2 text-info" ></i></a> </td>
+                    
+                    
+                    
+                        
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+
+
+
+</div>
+
+{% endblock content %} 
+
+
+

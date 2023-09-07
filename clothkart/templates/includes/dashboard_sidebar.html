@@ -1,0 +1,22 @@
+<aside class="col-md-3">
+  <!--   SIDEBAR   -->
+<ul class="list-group" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;">
+    <a class="list-group-item pt-4 {% if '/user/' == request.path %}active{% endif %}" href="{% url 'dashboard' %}"> <h6>Dashboard</h6> </a>
+    <a class="list-group-item {% if '/my_order/' in request.path %}active{% endif %}" href="{% url 'my_order' %}"> <h6>My Orders</h6> </a>
+    <a class="list-group-item {% if '/customer_care/' in request.path %}active{% endif %}" href="{% url 'customer_care' %}"> <h6>Customer Care</h6> </a>
+    {% comment %} <a class="list-group-item {% if '/edit_profile/' in request.path %}active{% endif %}" href="{% url 'edit_profile' %}"> <h6>Edit Profile</h6> </a> {% endcomment %}
+
+    <a class="list-group-item {% if '/change_password/' in request.path %}active{% endif %}" href="{% url 'change_password' %}"> <h6>Change Password</h6> </a>
+  </ul>
+  <br>
+  <a class="btn btn-light btn-block logoutinshop" href="{% url 'logout' %}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span> </a>
+  <!--   SIDEBAR .//END   -->
+</aside>
+<style>
+  .list-group-item.active {
+    z-index: 2;
+    color: #fff;
+    background-color: #fd890d;
+    border-color: #d1710a;
+}
+</style>

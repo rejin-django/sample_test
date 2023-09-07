@@ -1,0 +1,423 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+	.slid-yotube {
+		padding: 4rem 0;
+	}
+	.slide-container {
+		max-width: 1000px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 0 auto;
+	} .arrow {
+		width: 2rem;
+		margin: 0 1rem;
+	} .sectionclass {
+		width: 100%;
+		margin: 0 auto;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+	} .sectionclass::-webkit-scrollbar {
+		height: 9px;
+		width: 2px;
+		/* border: 1px solid yellowgreen; */
+		background: #e4e4e4b3;
+		background: gainsboro;
+	  } .sectionclass::-webkit-scrollbar-thumb {
+		background-color: #a0a0a06b;
+		outline: 1px solid #ca383830;
+	  }  .sectionclass .thumbnail {
+		flex: 0 0 auto;
+		object-fit: cover;
+		cursor: pointer;
+		margin: 5px;
+		border-radius: 5px;
+		overflow: hidden;
+		transform: scale(.95);
+		transition: all .3s;
+	} .sectionclass .thumbnail:hover {
+		transform: scale(1);
+	} .product-details {
+		text-align: center;
+		border-bottom: 2rem;
+		background-color: beige;
+	} .hides .sectionclass::-webkit-scrollbar {
+        display: none;
+	}  .heit-card {
+		height: 28vh;
+	   }
+</style>
+
+<!-- ========================= SECTION PAGETOP ========================= -->
+{% comment %} <section class="menubg3">
+	<div class="conTAIneR">
+		 <div class="border-bottom pb-2">
+			<span><a href="" class="active">Bestsellers</a></span>
+			<span><a href="">Hot New Releases</a></span>
+			<span><a href="">Movers and Shakers</a></span>
+			<span><a href="">Most Wished For</a></span>
+			<span><a href="">Most Gifted</a></span><br>
+		 </div>
+		 
+	</div> {% endcomment %}
+
+<!--<div class="container">
+	{% if 'search' in request.path %}
+		<h5 class="title-page text-info">Search Result</h5>
+		
+	{% else %}
+		<h5 class="title-page text-info">Products</h5>
+	{% endif %}
+
+</div>  --><!-- container //  -->
+</section>
+<!-- ========================= SECTION INTRO END// ========================= -->
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content"><br>
+<div class="conTAIneR">
+
+{% comment %} <div class="row">
+	<aside class="col-md-3">
+
+<div class="card">
+	<article class="filter-group">
+		<header class="card-header">
+			<a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+				<i class="icon-control fa fa-chevron-down"></i>
+				<h6 class="title">Categories</h6>
+			</a>
+		</header>
+		<div class="filter-content collapse show" id="collapse_1" style="">
+			<div class="card-body">
+
+				<ul class="list-menu">
+					<li><a href="{% url 'store' %}">All Products  </a></li>
+					{% for category in links %}
+				<li><a href="{{ category.get_url }}">{{ category.category_name }}  </a></li>
+					{% endfor %}
+				</ul>
+
+			</div> 
+		</div>
+	</article>
+
+</div> 
+
+	</aside>  {% endcomment %}
+	{% comment %} <main class="col-md-9"> {% endcomment %}
+
+<header class="mb-4 pb-3">
+		<div class="form-inline">
+			<span><h2><b>Ideaux Bestsellers</b></h2>
+			<h6>Our most popular products based on sales. Updated frequently.</h6></span>
+			
+			{% comment %} <span class="mr-md-auto text-info"><b>{{ product_count }}</b> Items found </span> {% endcomment %}
+		</div>
+</header>
+
+<!--=============== main section ============-->
+<div class="row">
+	<div class="col-md-2">
+		<div class="bord-verticl">
+			<h6><b>Any Department</b></h6>
+		<ul class="list-inul">
+			<li><a href="{% url 'store' %}">All Products </a></li>
+			{% for category in links %}
+			<li><a href="{{ category.get_url }}">{{ category.category_name }}  </a></li>
+			{% endfor %}
+		
+		</ul>
+		</div>
+	</div>
+	<div class="col-md-10">
+		<div class="row">
+			{% if products %}
+			{% for product in products %}
+			<div class="col-md-3 col-sm-6 col-lg-3">
+				<a href="{{product.get_url}}">
+				<figure class="card card-product-grid">
+					<div class="img-wrap">
+		
+						<a href="{{product.get_url}}"><img src="{{ product.images.url }}"></a>
+		
+					</div> <!-- img-wrap.// -->
+		
+					
+					<div class="text-center pt-3 heit-card"> <!--Name section-->
+						<h5><b>{{ product.product_name }} ({{product.brand}})</b></h5>
+						<div class="rating-star">
+							<span>
+							   <i class="fa fa-star{% if product.averageReview < 0.5 %}-o{% elif product.averageReview >= 0.5 and product.averageReview < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
+							   <i class="fa fa-star{% if product.averageReview < 1.5 %}-o{% elif product.averageReview >= 1.5 and product.averageReview < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
+							   <i class="fa fa-star{% if product.averageReview < 2.5 %}-o{% elif product.averageReview >= 2.5 and product.averageReview < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
+							   <i class="fa fa-star{% if product.averageReview < 3.5 %}-o{% elif product.averageReview >= 3.5 and product.averageReview < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
+							   <i class="fa fa-star{% if product.averageReview < 4.5 %}-o{% elif product.averageReview >= 4.5 and product.averageReview < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
+						   </span> 
+					   </div><br>
+							<div class="prodt-sale-card mt-2">Limited time deal</div><br>
+							<div class="d-flex align-items-center justify-content-center pt-3">
+								<h5><sup>₹</sup><h3><b>{{product.price}}</b></h3></h5>&nbsp;&nbsp;
+								<span><s>₹{{product.mrp}}</s></span>&nbsp;&nbsp;<span> ( {{product.offer}} %)</span>
+							</div>
+							{% comment %} <div class="d-flex align-items-center justify-content-center pt-3">
+								<h5><sup>₹</sup><h3><b>{{product.price}}</b></h3></h5>&nbsp;&nbsp;
+								<span><s>₹{{product.mrp}}</s></span>
+							</div {% endcomment %}
+						
+					</div>
+		
+					{% comment %} <figcaption class="info-wrap">
+						<div class="fix-height">
+							<a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
+							<div class="price-wrap mt-2">
+								<span class="price">₹ {{ product.price }}</span>
+							</div> <!-- price-wrap.// -->
+						</div>
+						<a href="{{ product.get_url }}" class="btn btn-block btn-dark">show more detail </a>
+					</figcaption> {% endcomment %}
+				</figure>
+			</a> 
+			</div>
+		<!-- col.// -->
+			{% endfor %}
+			{% else %}
+			<div>
+				<h5 class="text-primary">No result found. Please try again.</h5>
+				<a href="{% url 'store'  %}" class="widget-header pl-3 ml-3 "><button type="submit" class="btn  btn-dark"> <span class="text">Latest products</span></button></a>
+			</div>
+			{% endif %}
+		</div>
+
+
+		<div class="container">
+			<nav class="mt-4" aria-label="Page navigation sample">
+				{% if products.has_other_pages %}
+				  <ul class="pagination">
+						{% if products.has_previous %}
+					<li class="page-item"><a class="page-link" href="?page={{products.previous_page_number}}">Previous</a></li>
+						{% else %}
+						<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+						{% endif %}
+			
+						{% for i in products.paginator.page_range %}
+							{% if products.number == i %}
+							<li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+							{% else %}
+								<li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+							{% endif %}
+					{% endfor %}
+			
+						{% if products.has_next %}
+						<li class="page-item"><a class="page-link" href="?page={{products.next_page_number}}">Next</a></li>
+						{% else %}
+							<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+						{% endif %}
+				  </ul>
+				{% endif %}
+			</nav>
+			</div>
+		
+			</main> 
+		
+		</div>
+		<!--=================Carousel section start================-->
+	{% if shoe %}
+		<div class="conTAIner">
+			<div id="myCarousel" class="carousel slide" data-interval="false" data-ride="carousel">
+			
+				<div class="carousel-inner">
+					{% if shoe %}
+					<span class="d-flex align-items-center"><h1 class="Headngprodct">Bestsellers in  Shoes and Slippers </h1>&nbsp;&nbsp;<a href="{% url 'store' %}">See more</a></span>
+			{% endif %}
+					<div class="carousel-item py-5 active hides">
+						<section class="container sectionclass" id="slider">
+							{% for i in shoe %}
+							<div class="thumbnail col-md-2">
+							<a href="{{i.get_url}}">
+			                    <span style="height: 22vh;width: 100%;display: block;">
+									<img src="{{ i.images.url }}" width="auto" height="100%">
+								</span>
+							
+									<div><h6 class="text-para--a"><a href="">{{i.product_name}}</a></h6>
+										<div class="rating-star">
+											<span>
+											   <i class="fa fa-star{% if i.averageReview < 0.5 %}-o{% elif i.averageReview >= 0.5 and i.averageReview < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
+											   <i class="fa fa-star{% if i.averageReview < 1.5 %}-o{% elif i.averageReview >= 1.5 and i.averageReview < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
+											   <i class="fa fa-star{% if i.averageReview < 2.5 %}-o{% elif i.averageReview >= 2.5 and i.averageReview < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
+											   <i class="fa fa-star{% if i.averageReview < 3.5 %}-o{% elif i.averageReview >= 3.5 and i.averageReview < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
+											   <i class="fa fa-star{% if i.averageReview < 4.5 %}-o{% elif i.averageReview >= 4.5 and i.averageReview < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
+										   </span> 
+									   </div><br>
+									</div>
+									<div class="d-flex text-black"><h5>₹{{i.price}}</h5></div>
+									{% comment %} <div class="text-black">Get it by Thursday, February 23</div> {% endcomment %}
+								</a>
+							</div>
+							{% endfor %}
+							
+						</section>
+					 </div> <!--carousel-->
+		
+					<div class="carousel-item py-5 hides">
+						<section class="container sectionclass" id="slider">
+							
+							{% for i in slipper %}
+							<div class="thumbnail col-md-2">
+							<a href="{{i.get_url}}">
+			                    <span style="height: 22vh;width: 100%;display: block;">
+									<img src="{{ i.images.url }}" width="auto" height="100%">
+								</span>
+							
+									<div><h6 class="text-para--a"><a href="">{{i.product_name}}</a></h6>
+										<div class="rating-star">
+											<span>
+											   <i class="fa fa-star{% if i.averageReview < 0.5 %}-o{% elif i.averageReview >= 0.5 and i.averageReview < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
+											   <i class="fa fa-star{% if i.averageReview < 1.5 %}-o{% elif i.averageReview >= 1.5 and i.averageReview < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
+											   <i class="fa fa-star{% if i.averageReview < 2.5 %}-o{% elif i.averageReview >= 2.5 and i.averageReview < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
+											   <i class="fa fa-star{% if i.averageReview < 3.5 %}-o{% elif i.averageReview >= 3.5 and i.averageReview < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
+											   <i class="fa fa-star{% if i.averageReview < 4.5 %}-o{% elif i.averageReview >= 4.5 and i.averageReview < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
+										   </span> 
+									   </div><br>
+									</div>
+									<div class="d-flex text-black"><h5>₹{{i.price}}</h5></div>
+									{% comment %} <div class="text-black">Get it by Thursday, February 23</div> {% endcomment %}
+								</a>
+							</div>
+							{% endfor %}
+						</section>
+				   </div> <!--carousel-->
+	
+	
+					
+					
+				</div>
+				<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+					<span class="fa fa-chevron-left" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</a>
+				<a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+					<span class="fa fa-chevron-right" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
+		</div>
+		{% endif %}
+	</div> <!--container-->
+			<!--=================Carousel section end================-->
+
+
+
+
+
+
+
+			<!--=======================secnd carousel===============-->
+
+		
+			</div> 
+				
+
+			
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+
+{% comment %} <div class="row">
+	{% if products %}
+	{% for product in products %}
+	<div class="col-md-3  col-sm-6 col-lg-3">
+		<figure class="card card-product-grid">
+			<div class="img-wrap">
+
+				<a href="{{ product.get_url }}"><img src="{{ product.images.url }}"></a>
+
+			</div> <!-- img-wrap.// -->
+			<figcaption class="info-wrap">
+				<div class="fix-height">
+					<a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
+					<div class="price-wrap mt-2">
+						<span class="price">₹ {{ product.price }}</span>
+					</div> <!-- price-wrap.// -->
+				</div>
+				<a href="{{ product.get_url }}" class="btn btn-block btn-dark">show more detail </a>
+			</figcaption>
+		</figure>
+	</div> <!-- col.// -->
+	{% endfor %}
+	{% else %}
+	<div>
+		<h5 class="text-primary">No result found. Please try again.</h5>
+		<a href="{% url 'store'  %}" class="widget-header pl-3 ml-3 "><button type="submit" class="btn  btn-dark"> <span class="text">Latest products</span></button></a>
+	</div>
+	{% endif %}
+</div>  {% endcomment %}
+
+
+
+
+
+</div> 
+</section>
+
+
+{% endblock %}
+<script>
+
+	//Variable
+	let thumbnail = document.getElementsByClassName("thumbnail");
+	let slider = document.getElementById("slider");
+	let buttonRight = document.getElementById("slide-right");
+	let buttonLeft = document.getElementById("slide-left");
+
+	buttonLeft.addEventListener("click", () => {
+		alert('rejin')
+		slider.scrollLeft -= 125px;
+	});
+	buttonRight.addEventListener("click", () => {
+		alert('martin')
+		slider.scrollLeft += 125px;
+	});
+
+	const maxScrollLeft = slider.scrollWidth - slider.clientWidth;
+	alert(maxScrollLeft;)
+
+	function autoPlay() {
+		if(slider.scrollLeft > (maxScrollLeft - 1)) {
+			slider.scrollLeft -= maxScrollLeft;
+		} else {
+			slider.scrollLeft += 1;
+		}
+}
+
+let play = setInterval(autoPlay, 50);
+//Hover slider
+for (let i = 0; i < thumbnail.length; i++) {
+	thumbnail[i].addEventListener("mouseover", () =>{
+		clearInterval(play)
+	})
+}
+</script>

@@ -1,0 +1,14 @@
+{% autoescape off %}
+
+Hi {{order_product.product.supplier.name}},
+
+YOUR ORDER HAS BEEN RECIEVED
+
+Order Number: {{order.order_number}}
+
+order Poduct : {{order_products.product.product_name}}  {{order_products.product.images}}
+
+
+order_date : {{order_products.created_at}}
+
+{% endautoescape %}

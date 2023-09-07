@@ -1,0 +1,71 @@
+
+{% extends 'admin/layout.html' %}
+{% load static %}
+{% block content%} 
+<style>
+    
+    .dtsp-panes, .dtsp-panesContainer {
+        display: none;
+    }
+    #example {
+        float : right !important;
+    }
+
+
+
+</style>
+<div class="container">
+<div class="card p-5">
+    <h3 class="text-center">Customer Queries</h3>
+    <hr class="hr-center">
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <div class="table-responsive"> 
+            <table id="example" class="table table-striped nowrap"  style="overflow-x:auto;width:100%;">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Ticket</th>
+
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone_number</th>
+                        <th>Queries</th>
+                        <th>Reason </th> 
+                        <th>Action</th> 
+                    
+
+
+                    
+                    </tr>
+                  
+                </thead>
+                <tbody>
+                    {% for i in customer %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td> #{{i.ticket}} </td>
+
+                        <td>{{i.name}} </td>
+                     
+                        <td>{{i.email}}</td>
+                        <td>{{i.phone_number}}</td>
+                        <td>{{i.subject}}</td>
+                        <td>{{i.reason}}</td>
+                    <td><a href="{% url 'customer_queries_solution' i.id %}">Email sent</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+
+
+
+</div>
+
+{% endblock content %} 
+
+

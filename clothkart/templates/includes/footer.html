@@ -1,0 +1,138 @@
+<!-- ========================= FOOTER ========================= -->
+
+
+<style>
+	{% comment %} .footer{
+	    background-color: #2d2929;
+		position: static;
+		bottom: 0;
+		width:100%;
+} {% endcomment %}
+a {
+	color: #fff;
+	text-decoration: none;
+} a:hover {
+	color: #e7962d !important;
+}
+.footerone {
+	background-color: #37475a;
+	color: #fff;
+	font-size: 12px;
+	font-weight: 500;
+	padding: 20px 0;
+} .footertwo {
+	background-color: #232f3e;
+	color: #fff;
+	padding: 30px 0;
+} .footertwo h6 {
+	font-size: 16px;
+	font-weight: 600;
+} .footertwo ul li {
+	font-size: 14px;
+	justify-content: center;
+}
+    .Boxhovern .btnssty{
+		border: 1px solid;
+		padding: 5px 60px;
+		background-color: #e7962d;
+		color: #000;
+		border: none;
+	}
+	  .footer_text{
+		color: ghostwhite ;
+	  }
+</style>
+
+<div class="footer">
+	<div class="text-center">
+		<hr>
+		{% if user.id is None %}
+			<div class="Boxhovern">
+				<h6>See personalized recommendations</h6>
+			<a href="{% url 'login' %}"><Button class="btnssty">Sign in</Button></a>  
+			  <p class="sigin">New customer? <a href="#">Start here.</a></p>
+			</div>
+			{% endif %}
+			  <hr>
+        
+	</div>
+<footer class="section-footer border-top">
+      <div class="footerone text-center">
+		<p><a href="#">Back to top</a></p>
+	  </div>
+	  <div class="footertwo">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<h6>Get to Know Us</h6>
+					<ul>
+						<li><a href="#">About Us</a></li>
+						<li><a href="#">Careers</a></li>
+						<li><a href="#">Press Releases</a></li>
+						<li><a href="#">Amazon Science</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3">
+					<h6>Connect with Us</h6>
+					<ul>
+						<li><a href="#">Facebook</a></li>
+						<li><a href="#">Instagram</a></li>
+						<li><a href="#">Twitter</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3">
+					<h6>Make Money with Us</h6>
+					<ul>
+						<li><a href="#">Sell on Amazon</a></li>
+						<li><a href="#">Sell under Amazon Accelerator</a></li>
+						<li><a href="#">Protect and Build Your Brand</a></li>
+						<li><a href="#">Become an Affiliate</a></li>
+						<li><a href="#">Fulfilment by Amazon</a></li>
+						<li><a href="#">Advertise Your Products</a></li>
+						<li><a href="#">Become an Affiliate</a></li>
+
+					</ul>
+				</div>
+				<div class="col-md-3">
+					<h6>Let Us Help You</h6>
+					<ul>
+						<li><a href="#">COVID-19 and Amazon</a></li>
+						<li><a href="{% url 'dashboard' %}">Your Account</a></li>
+						<li><a href="#">Returns Centre</a></li>
+						<li><a href="#">Help</a></li>
+					</ul>
+				</div>
+
+			</div>
+			<hr>
+			<div class="footerone text-center">
+				<p>Copy Right @ <a href="#">ideaux.in</a></p>
+			  </div>
+		</div>
+	  </div>
+
+	{% comment %} <div class="container">
+	 <div class="footer_text">
+		<section class="footer-bottom border-top row">
+			<div class="col-md-2">
+				<p class="footer_text"> 2022  IDEAUX </p>
+			</div>
+			<div class="col-md-8 text-md-center">
+				<span  class="px-2">ideaux.tech@gmail.com</span>
+				<span  class="px-2">+8766357637</span>
+				<span  class="px-2">56,mooventhar nager, Punnainagar-629004</span>
+			</div>
+			<div class="col-md-2 text-md-right text-light">
+				<i class="fab fa-lg fa-cc-visa"></i>
+				<i class="fab fa-lg fa-cc-paypal"></i>
+			
+			</div>
+		</div>
+		</section>
+	</div> {% endcomment %}
+</footer>
+<!-- ========================= FOOTER END // ========================= -->
+</div>
+
+</body>
+</html>

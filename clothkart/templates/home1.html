@@ -1,0 +1,672 @@
+{% load static %}
+<style>
+    {% comment %} .carousel-control-next-icon {
+		background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e);
+		background-color: yellow;
+		padding: 14px;
+	  } {% endcomment %}
+      .ConTainer {
+        margin: 3rem 2rem;
+      }
+      .conTAiners {
+        margin: 3rem 16rem;
+      }
+      @media screen and (max-width:700px) {
+        .ConTainer {
+            margin: 1rem 1rem;
+          }
+          .conTAiners {
+            margin: 0;
+          }
+      }
+      .fa-chevron-left, .fa-chevron-right {
+        font-size: 20px;
+        color: #000;
+        background-color: #ffffff;
+        padding: 20px 14px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      }
+      .icowidh {
+        width: 3%;
+      } span p {
+        background-color: #CC0C39;
+        color: #fff;
+        padding: 5px;
+      } .usertext {
+        color: #CC0C39;
+        font-size: 12px;
+        font-weight: 700;
+      } .producttext {
+        color: #000;
+        font-size: 16px;
+      } .pdctimag {
+        background-color: #f4f2f2;
+        padding: 20px;
+      } .Headngprodct {
+        font-size: 22px;
+        font-weight: 600;
+        padding: 0 0 0 33px;
+      }
+       .prodtcenter {
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+       }.checked {
+        color: orange;
+      } .text-black {
+        color: #000;
+      } .ribbn{
+        background-color: #CC0C39;
+        color: #fff;
+        padding: 2px 3px;
+        position: relative;
+      } .ribbn::before {
+        content: "";
+        position: absolute;
+        right: -5px;
+        bottom: 0;
+        border-style: dashed;
+        border-width: 6px;
+        border-color: rgba(255,255,255,0);
+        border-bottom: 6px solid #CC0C39;
+        border-top-width: 0;
+        width: 0;
+        height: 0;
+        font-size: 0;
+        line-height: 0;
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        border-bottom-width: 10px;
+      } .ribbn::after {
+        content: "";
+        position: absolute;
+        right: -5px;
+        top: 0;
+        border-style: dashed;
+        border-width: 6px;
+        border-color: rgba(255,255,255,0);
+        border-top: 6px solid #CC0C39;
+        border-top-width: 0;
+        width: 0;
+        height: 0;
+        font-size: 0;
+        line-height: 0;
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        border-top-width: 10px; } 
+        .text-para--a a {
+        color: darkcyan;
+        } .angr {
+            color: darkcyan;
+            font-size: 12px;
+          } 
+    .homeclick {
+        background: transparent;
+        border: none;
+    }  .img-opsn-fix {
+        width: 100%;height: 18vh;display: block;
+    }    
+
+    .usertext {
+        color: #CC0C39;
+        font-size: 12px;
+        font-weight: 700;
+      }
+</style>
+
+<section class="section-name padding-y-sm Bgcolors">
+	<div class="ConTainer">
+		<div class="row">
+			<div class="col-lg-4 col-sm-12">
+				<div class="Box">
+                    <form action="{% url 'men_cloth' %}" method="post">
+                        <button type="submit" class="homeclick">
+					<div class="row">
+                       
+						<h4>Styles for Men | Women cloths</h4>
+						<div class="col-6">
+                            {% comment %} <span class="img-opsn-fix"> {% endcomment %}
+                                <a href="#"><img src="{% static 'images/items/50.jpg' %}" width="100%"><p>Men's cloths</p></a>
+                            {% comment %} </span> {% endcomment %}
+                        </div>
+						<div class="col-6"><a href="{% url 'men_cloth' %}"><img src="{% static 'images/items/home5.jpg' %}" width="100%"><p></p></a></div>
+						<div class="col-6"><a href="{% url 'men_cloth' %}"><img src="{% static 'images/items/55.jpg' %}" width="100%"><p></p></a></div>
+						<div class="col-6"><a href="{% url 'men_cloth' %}"><img src="{% static 'images/items/54.jpg' %}" width="100%"><p>women's cloths</p></a></div><br>
+						<div class="Smore"><a href="{% url 'men_cloth' %}">See more</a></div>
+					</div>
+                </button>
+                </form>
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-12">
+				<div class="Box">
+                   <form action="{% url 'watch' %}" method="post">
+                    <button type="submit" class="homeclick">
+					<div class="row">
+						<h4>New Trends| Watches</h4>
+						<div class="col-6"><a href="{% url 'watch' %}"><img src="{% static 'images/items/watch2.jpg' %}" width="100%"><p></p></a></div>
+						<div class="col-6"><a href="{% url 'watch' %}"><img src="{% static 'images/items/home7.jpg' %}" width="100%"><p>Women's watches</p></a></div>
+						<div class="col-6"><a href="{% url 'watch' %}"><img src="{% static 'images/items/watch.jpg' %}" width="100%"><p>Men's watches</p></a></div>
+						<div class="col-6"><a href="{% url 'watch' %}"><img src="{% static 'images/items/watch3.jpg' %}" width="100%"><p></p></a></div><br>
+						<div class="Smore"><a href="{% url 'watch' %}">See more</a></div>
+					</div>
+                    </button>
+                   </form>
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-12">
+				<div class="Box">
+					<div class="row">
+						<h4>Up to 70% off | Clearance store</h4>
+						<a href="{% url 'view_tv' %}">
+                            <span>
+                                <img src="{% static 'images/items/53.jpg' %}" width="100%">
+                            </span>
+                        </a>
+						<br>
+						<div class="Smore"><a href="{% url 'view_tv' %}">See more</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+ <!-- ===========================  Secoundary Carousel============================ -->
+ <section class="mt-5">
+    <div class="conTAIner">
+        <div id="myCarousel2" class="carousel slide" data-interval="false" data-ride="carousel">
+            <div class="carousel-inner">
+                
+                <span class="d-flex align-items-center"><h1 class="Headngprodct">Today's Deal</h1>&nbsp;&nbsp;</span> <br>
+                    
+                <div class="carousel-item py-5 active">
+                    <section class="container sectionclass" id="slider">
+                        {% for i in product %}
+                        <div class="thumbnail col-md-2">
+                            <a href="{{i.get_url}}">
+                                <span style="display: flex;height: 23vh;width: 90%;background-color: #fff;align-items: center;justify-content: center;" >
+                                    <img src="{{i.images.url}}"  height="100%" width="auto">
+                                </span>
+                                <div class="pt-4"><span class="d-flex align-items-center usertext">
+                                    <p>up to 40% off</p>&nbsp;&nbsp;Deal of the Day</span>
+                                   <span class="producttext">{{i.product_name}}</span>
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+                       
+                    </section>
+                 </div> <!--carousel-->
+    
+    
+            </div>
+            
+    </div>
+
+<!--carousel-->
+
+
+       
+    </div>
+</div> <!--container-->
+</section>
+<!-- ===========================  Secoundary Carousel end ============================ -->
+<!--==================3rd section start================================-->
+<section>
+    <div class="conTAiners">
+        <div class="row">
+            <div class="d-flex  prodtcenter">
+                {% if pro %}
+                <div class="col-3">
+                    
+                        <a href="{{pro.get_url}}">
+                            <span style="display: block; width:100%;height:40vh">
+                                <img src="{{pro.images.url}}" width="auto" height="100%">
+                            </span>
+                            </a>
+                    
+                </div>
+               <span class="p-5">
+                <h5> {{pro.description}}</h5>
+               <div class="rating-star">
+                <span>
+                    <i class="fa fa-star{% if pro.averageReview < 0.5 %}-o{% elif pro.averageReview >= 0.5 and pro.averageReview < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
+                    <i class="fa fa-star{% if pro.averageReview < 1.5 %}-o{% elif pro.averageReview >= 1.5 and pro.averageReview < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
+                    <i class="fa fa-star{% if pro.averageReview < 2.5 %}-o{% elif pro.averageReview >= 2.5 and pro.averageReview < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
+                    <i class="fa fa-star{% if pro.averageReview < 3.5 %}-o{% elif pro.averageReview >= 3.5 and pro.averageReview < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
+                    <i class="fa fa-star{% if pro.averageReview < 4.5 %}-o{% elif pro.averageReview >= 4.5 and pro.averageReview < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
+               
+                    </span>
+            </div>
+                <div><h2>{{pro.price}}</span></h2>
+            </span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!--==================3rd section start================================-->
+
+<!--==================4rd section start================================-->
+{% comment %} <div class="ConTainer">
+    <div class="row">
+        <div class="col-lg-3 col-md-2 col-sm-2">
+            <div class="Box">
+                <div class="row">
+                    <h4>Home appliances | Up to 50% off</h4>
+                    <div class="col-6"><a href="#"><img src="{% static 'images/items/home1.jpg' %}" width="100%"><p>Air conditioners</p></a></div>
+                    <div class="col-6"><a href="#"><img src="{% static 'images/items/home2.jpg' %}" width="100%"><p>Refrigerators</p></a></div>
+                    <div class="col-6"><a href="#"><img src="{% static 'images/items/home3.jpg' %}" width="100%"><p>Microwaves</p></a></div>
+                    <div class="col-6"><a href="#"><img src="{% static 'images/items/home4.jpg' %}" width="100%"><p>Washing machines</p></a></div><br>
+                    <div class="Smore"><a href="#">See more</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-2 col-sm-2">
+            <div class="Box">
+                <div class="row">
+                    <h4>Up to 70% off | Clearance store in xyz shop</h4>
+                    <a href="#"><img src="{% static 'images/items/home9.jpg' %}" width="100%"></a>
+                    <br><br>
+                    <div class="Smore"><a href="#">See more</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-2 col-sm-2">
+            <div class="Box">
+                <div class="row">
+                    <h4>Up to 60% off | Styles for women</h4>
+                    <div class="col-6"><a href="#"><img src="{% static 'images/items/home5.jpg' %}" width="100%"><p>Women's Clothing</p></a></div>
+                    <div class="col-6"><a href="#"><img src="{% static 'images/items/home6.jpg' %}" width="100%"><p>Footwear+Handbags</p></a></div>
+                    <div class="col-6"><a href="#"><img src="{% static 'images/items/home7.jpg' %}" width="100%"><p>Watches</p></a></div>
+                    <div class="col-6"><a href="#"><img src="{% static 'images/items/home8.jpg' %}" width="100%"><p>Fashion jewellery</p></a></div><br>
+                    <div class="Smore"><a href="#">See more</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-2 col-sm-2">
+            <div class="Box">
+                <div class="row">
+                    <h4>Home appliances | Up to 50% off</h4>
+                    <div class="col-6"><a href="#"><img src="{% static 'images/items/home1.jpg' %}" width="100%"><p>Air conditioners</p></a></div>
+                    <div class="col-6"><a href="#"><img src="{% static 'images/items/home2.jpg' %}" width="100%"><p>Refrigerators</p></a></div>
+                    <div class="col-6"><a href="#"><img src="{% static 'images/items/home3.jpg' %}" width="100%"><p>Microwaves</p></a></div>
+                    <div class="col-6"><a href="#"><img src="{% static 'images/items/home4.jpg' %}" width="100%"><p>Washing machines</p></a></div><br>
+                    <div class="Smore"><a href="#">See more</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> {% endcomment %}
+<!--==================4rd section start end================================-->
+
+
+	<!-- ========================= SECTION  ========================= -->
+ <!--          
+    <section class="section-name padding-y-sm">
+	<div class="container">
+	
+	<header class="section-heading">
+		 <a href="{% url 'store' %}" class="btn btn-outline-info float-right">See all </a>
+	</header>
+	
+	<br>
+	<div class="row">
+		{% for product in products %}
+		<div class="col-md-3 col-sm-6 col-lg-4">
+			<div class="card card-product-grid">
+				<a href="{{ product.get_url }}" class="img-wrap"> <img src="{{ product.images.url }}"> </a>
+				<figcaption class="info-wrap">
+					<a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
+					<div class="price mt-1">₹ {{ product.price }}</div> 
+					<div class="rating-star">
+						 <span>
+							<i class="fa fa-star{% if product.averageReview < 0.5 %}-o{% elif product.averageReview >= 0.5 and product.averageReview < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
+							<i class="fa fa-star{% if product.averageReview < 1.5 %}-o{% elif product.averageReview >= 1.5 and product.averageReview < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
+							<i class="fa fa-star{% if product.averageReview < 2.5 %}-o{% elif product.averageReview >= 2.5 and product.averageReview < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
+							<i class="fa fa-star{% if product.averageReview < 3.5 %}-o{% elif product.averageReview >= 3.5 and product.averageReview < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
+							<i class="fa fa-star{% if product.averageReview < 4.5 %}-o{% elif product.averageReview >= 4.5 and product.averageReview < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
+						</span> 
+					</div>
+	<div>
+					<a href="{{ product.get_url }}"><button type="submit" class="btn  btn-dark"> <span class="text">View detail</span><i class="fa fa-shopping-eye"></i> </button></a>
+					{% if wishlist %}
+					  <a href="{% url 'add_wishlist' product.id %}" class="widget-header pl-3 ml-3"><i class="fa fa-heart" style="color:red"></i></a>
+					{% else %}
+					  <a href="{% url 'add_wishlist' product.id %}" class="widget-header pl-3 ml-3 "><i class="fa fa-heart" style="color:transparent"></i></a>
+	
+					{% endif %}
+					
+	
+					</div>
+				</figcaption>
+			
+			</div>
+		</div> 
+		{% endfor %}
+	</div> 
+	
+	</div>
+	</section>
+
+</section>
+
+
+
+
+
+
+<section class="mt-5">
+   
+		<div class="ConTainer">
+            <div id="myCarousel1" class="carousel slide" data-interval="false" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item py-5 active">
+                        <span class="d-flex align-items-center"><h1 class="Headngprodct">Products related to this item</h1>&nbsp;&nbsp;<a href="#" class="angr">See more details</a></span> <br>
+                         <div class="row">
+                             <div class="col-md-2"><a href="#"><img src="{% static 'images/items/home10.png' %}" width="100%" height="auto">
+                                
+                                 <div><h6 class="text-para--a"><a href="">Party Propz Warm LED Photo Clip Remote Fairy String Lights for Decoration Set of 40</a></h6>
+                                  <span class="fa fa-star checked"></span>
+                                  <span class="fa fa-star checked"></span>
+                                  <span class="fa fa-star checked"></span>
+                                  <span class="fa fa-star"></span>
+                                  <span class="fa fa-star"></span>
+                                 </div>
+                                 <div class="d-flex text-black"><h5>₹350.00</h5>(₹14.80/count)</div>
+                                 <div class="text-black">Get it by Thursday, February 23</div>
+                                 </a>
+                             </div>
+                            
+                             <div class="col-md-2"><a href="#">
+                              <img src="{% static 'images/items/home11.png' %}" width="100%" height="auto">
+                              <div><h6 class="text-para--a"><a href="">Party Propz Warm LED Photo Clip Remote Fairy String Lights for Decoration Set of 40</a></h6>
+                               <span class="fa fa-star checked"></span>
+                               <span class="fa fa-star checked"></span>
+                               <span class="fa fa-star checked"></span>
+                               <span class="fa fa-star"></span>
+                               <span class="fa fa-star"></span>
+                               </div>
+                               <div><span class="ribbn">Discount</span>&nbsp;&nbsp;60%</div>
+                               <div class="d-flex text-black"><h5>₹350.00</h5>(₹14.80/count)</div>
+                              <div class="text-black">Get it by Thursday, February 23</div>
+                              </a>
+                          </div>
+                          <div class="col-md-2"><a href="#">
+                              <img src="{% static 'images/items/home12.png' %}" width="100%" height="auto">
+                              <div><h6 class="text-para--a"><a href="">Scotch-Brite Premium Toilet Plastic Brush with Round Container (Blue, White, IX840121046,Pack of 1)</a></h6>
+                               <span class="fa fa-star checked"></span>
+                               <span class="fa fa-star checked"></span>
+                               <span class="fa fa-star checked"></span>
+                               <span class="fa fa-star"></span>
+                               <span class="fa fa-star"></span>
+                              </div>
+                              <div class="d-flex text-black"><h5>₹350.00</h5>(₹14.80/count)</div>
+                              <div class="text-black">Get it by Thursday, February 23</div>
+                              </a>
+                          </div>
+                          <div class="col-md-2"><a href="#">
+                              <img src="{% static 'images/items/home13.png' %}" width="100%" height="auto">
+                              <div><h6 class="text-para--a"><a href="">Scotch Brite Green Scrub, Net Sponge, 1 Piece</a></h6>
+                               <span class="fa fa-star checked"></span>
+                               <span class="fa fa-star checked"></span>
+                               <span class="fa fa-star checked"></span>
+                               <span class="fa fa-star"></span>
+                               <span class="fa fa-star"></span>
+                              </div>
+                              <div><span class="ribbn">Discount</span>&nbsp;&nbsp;60%</div>
+                              <div class="d-flex text-black"><h5>₹350.00</h5>(₹14.80/count)</div>
+                              <div class="text-black">Get it by Thursday, February 23</div>
+                              </a>
+                          </div>
+          
+                          <div class="col-md-2"><a href="#">
+                              <img src="{% static 'images/items/home15.png' %}" width="100%" height="auto">
+                              <div><h6 class="text-para--a"><a href="">Party Propz Warm LED Photo Clip Remote Fairy String Lights for Decoration Set of 40</a></h6>
+                               <span class="fa fa-star checked"></span>
+                               <span class="fa fa-star checked"></span>
+                               <span class="fa fa-star checked"></span>
+                               <span class="fa fa-star"></span>
+                               <span class="fa fa-star"></span>
+                              </div>
+                              <div class="d-flex text-black"><h5>₹350.00</h5>(₹14.80/count)</div>
+                              <div class="text-black">Get it by Thursday, February 23</div>
+                              </a>
+                          </div>
+                           
+                          <div class="col-md-2"><a href="#">
+                              <img src="{% static 'images/items/home14.png' %}" width="100%" height="auto">
+                              <div><h6 class="text-para--a"><a href="">Remote Fairy String Lights for Decoration Set of 40</a></h6>
+                               <span class="fa fa-star checked"></span>
+                               <span class="fa fa-star checked"></span>
+                               <span class="fa fa-star checked"></span>
+                               <span class="fa fa-star"></span>
+                               <span class="fa fa-star"></span>
+                              </div>
+                              <div class="d-flex text-black"><h5>₹350.00</h5>(₹14.80/count)</div>
+                              <div class="text-black">Get it by Thursday, February 23</div>
+                              </a>
+                          </div>
+          
+                         </div> 
+                     </div> 
+    
+                    <div class="carousel-item py-5">
+                        <span class="d-flex align-items-center"><h1 class="Headngprodct">Customers who viewed items in your browsing history also viewed</h1>&nbsp;&nbsp;<a href="#">See more details</a></span> <br>
+                        <div class="row">
+                            <div class="col-md-2"><a href="#"><img src="{% static 'images/items/home10.png' %}" width="100%" height="auto">
+                               
+                                <div><h6 class="text-para--a"><a href="">Party Propz Warm LED Photo Clip Remote Fairy String Lights for Decoration Set of 40</a></h6>
+                                 <span class="fa fa-star checked"></span>
+                                 <span class="fa fa-star checked"></span>
+                                 <span class="fa fa-star checked"></span>
+                                 <span class="fa fa-star"></span>
+                                 <span class="fa fa-star"></span>
+                                </div>
+                                <div class="d-flex text-black"><h5>₹350.00</h5>(₹14.80/count)</div>
+                                <div class="text-black">Get it by Thursday, February 23</div>
+                                </a>
+                            </div>
+                           
+                            <div class="col-md-2"><a href="#">
+                             <img src="{% static 'images/items/home11.png' %}" width="100%" height="auto">
+                             <div><h6 class="text-para--a"><a href="">Party Propz Warm LED Photo Clip Remote Fairy String Lights for Decoration Set of 40</a></h6>
+                              <span class="fa fa-star checked"></span>
+                              <span class="fa fa-star checked"></span>
+                              <span class="fa fa-star checked"></span>
+                              <span class="fa fa-star"></span>
+                              <span class="fa fa-star"></span>
+                              </div>
+                              <div><span class="ribbn">Discount</span>&nbsp;&nbsp;60%</div>
+                              <div class="d-flex text-black"><h5>₹350.00</h5>(₹14.80/count)</div>
+                             <div class="text-black">Get it by Thursday, February 23</div>
+                             </a>
+                         </div>
+                         <div class="col-md-2"><a href="#">
+                             <img src="{% static 'images/items/home12.png' %}" width="100%" height="auto">
+                             <div><h6 class="text-para--a"><a href="">Scotch-Brite Premium Toilet Plastic Brush with Round Container (Blue, White, IX840121046,Pack of 1)</a></h6>
+                              <span class="fa fa-star checked"></span>
+                              <span class="fa fa-star checked"></span>
+                              <span class="fa fa-star checked"></span>
+                              <span class="fa fa-star"></span>
+                              <span class="fa fa-star"></span>
+                             </div>
+                             <div class="d-flex text-black"><h5>₹350.00</h5>(₹14.80/count)</div>
+                             <div class="text-black">Get it by Thursday, February 23</div>
+                             </a>
+                         </div>
+                         <div class="col-md-2"><a href="#">
+                             <img src="{% static 'images/items/home13.png' %}" width="100%" height="auto">
+                             <div><h6 class="text-para--a"><a href="">Scotch Brite Green Scrub, Net Sponge, 1 Piece</a></h6>
+                              <span class="fa fa-star checked"></span>
+                              <span class="fa fa-star checked"></span>
+                              <span class="fa fa-star checked"></span>
+                              <span class="fa fa-star"></span>
+                              <span class="fa fa-star"></span>
+                             </div>
+                             <div><span class="ribbn">Discount</span>&nbsp;&nbsp;60%</div>
+                             <div class="d-flex text-black"><h5>₹350.00</h5>(₹14.80/count)</div>
+                             <div class="text-black">Get it by Thursday, February 23</div>
+                             </a>
+                         </div>
+         
+                         <div class="col-md-2"><a href="#">
+                             <img src="{% static 'images/items/home15.png' %}" width="100%" height="auto">
+                             <div><h6 class="text-para--a"><a href="">Party Propz Warm LED Photo Clip Remote Fairy String Lights for Decoration Set of 40</a></h6>
+                              <span class="fa fa-star checked"></span>
+                              <span class="fa fa-star checked"></span>
+                              <span class="fa fa-star checked"></span>
+                              <span class="fa fa-star"></span>
+                              <span class="fa fa-star"></span>
+                             </div>
+                             <div class="d-flex text-black"><h5>₹350.00</h5>(₹14.80/count)</div>
+                             <div class="text-black">Get it by Thursday, February 23</div>
+                             </a>
+                         </div>
+                          
+                         <div class="col-md-2"><a href="#">
+                             <img src="{% static 'images/items/home14.png' %}" width="100%" height="auto">
+                             <div><h6 class="text-para--a"><a href="">Remote Fairy String Lights for Decoration Set of 40</a></h6>
+                              <span class="fa fa-star checked"></span>
+                              <span class="fa fa-star checked"></span>
+                              <span class="fa fa-star checked"></span>
+                              <span class="fa fa-star"></span>
+                              <span class="fa fa-star"></span>
+                             </div>
+                             <div class="d-flex text-black"><h5>₹350.00</h5>(₹14.80/count)</div>
+                             <div class="text-black">Get it by Thursday, February 23</div>
+                             </a>
+                         </div>
+    
+                   </div> 
+               </div> 
+    
+    
+                    
+                    
+                </div>
+                <a class="carousel-control-prev" href="#myCarousel1" role="button" data-slide="prev">
+                    <span class="fa fa-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#myCarousel1" role="button" data-slide="next">
+                    <span class="fa fa-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+        </div>
+    </div> 
+
+   </section>
+
+
+
+   <div class="ConTainer">
+		<div class="row">
+			<div class="col-lg-4 col-sm-12">
+				<div class="Box">
+                    <form action="{% url 'men_cloth' %}" method="post">
+                        <button type="submit" class="homeclick">
+					<div class="row">
+                       
+						<h4>Styles for Men | Women cloths</h4>
+						<div class="col-6">
+                            {% comment %} <span class="img-opsn-fix"> {% endcomment %}
+                                <a href="#"><img src="{% static 'images/items/50.jpg' %}" width="100%"><p>Men's cloths</p></a>
+                            {% comment %} </span> {% endcomment %}
+                        </div>
+						<div class="col-6"><a href="{% url 'men_cloth' %}"><img src="{% static 'images/items/home5.jpg' %}" width="100%"><p></p></a></div>
+						<div class="col-6"><a href="{% url 'men_cloth' %}"><img src="{% static 'images/items/55.jpg' %}" width="100%"><p></p></a></div>
+						<div class="col-6"><a href="{% url 'men_cloth' %}"><img src="{% static 'images/items/54.jpg' %}" width="100%"><p>women's cloths</p></a></div><br>
+						<div class="Smore"><a href="{% url 'men_cloth' %}">See more</a></div>
+					</div>
+                </button>
+                </form>
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-12">
+				<div class="Box">
+                   <form action="{% url 'watch' %}" method="post">
+                    <button type="submit" class="homeclick">
+					<div class="row">
+						<h4>New Trends| Watches</h4>
+						<div class="col-6"><a href="{% url 'watch' %}"><img src="{% static 'images/items/watch2.jpg' %}" width="100%"><p></p></a></div>
+						<div class="col-6"><a href="{% url 'watch' %}"><img src="{% static 'images/items/home7.jpg' %}" width="100%"><p>Women's watches</p></a></div>
+						<div class="col-6"><a href="{% url 'watch' %}"><img src="{% static 'images/items/watch.jpg' %}" width="100%"><p>Men's watches</p></a></div>
+						<div class="col-6"><a href="{% url 'watch' %}"><img src="{% static 'images/items/watch3.jpg' %}" width="100%"><p></p></a></div><br>
+						<div class="Smore"><a href="{% url 'watch' %}">See more</a></div>
+					</div>
+                    </button>
+                   </form>
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-12">
+				<div class="Box">
+					<div class="row">
+						<h4>Up to 70% off | Clearance store</h4>
+						<a href="{% url 'view_tv' %}">
+                            <span>
+                                <img src="{% static 'images/items/tv.jpg' %}" width="100%">
+                            </span>
+                        </a>
+						<br>
+						<div class="Smore"><a href="{% url 'view_tv' %}">See more</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+ <!-- ===========================  Secoundary Carousel============================ -->
+ <section class="mt-5">
+    <div class="conTAIner">
+        <div id="myCarousel2" class="carousel slide" data-interval="false" data-ride="carousel">
+            <div class="carousel-inner">
+                
+                <span class="d-flex align-items-center"><h1 class="Headngprodct">Trending Collections
+
+                </h1>&nbsp; &nbsp;</span> <br>
+                    
+                <div class="carousel-item py-5 active">
+                    <section class="container sectionclass" id="slider">
+                        {% for i in saree %}
+                        <div class="thumbnail col-md-2">
+                            <a href="{{i.get_url}}">
+                                <span style="display: flex;height: 23vh;width: 90%;background-color: #fff;align-items: center;justify-content: center;" >
+                                    <img src="{{i.images.url}}"  height="100%" width="auto">
+                                </span>
+                                <div class="pt-4"><span class="d-flex align-items-center usertext">
+                                    
+                                   <span class="producttext">{{i.product_name}}</span>
+                                </div>
+                                <div class="rating-star">
+                                    <span>
+                                        <i class="fa fa-star{% if i.averageReview < 0.5 %}-o{% elif i.averageReview >= 0.5 and i.averageReview < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
+                                        <i class="fa fa-star{% if i.averageReview < 1.5 %}-o{% elif i.averageReview >= 1.5 and i.averageReview < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
+                                        <i class="fa fa-star{% if i.averageReview < 2.5 %}-o{% elif i.averageReview >= 2.5 and i.averageReview < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
+                                        <i class="fa fa-star{% if i.averageReview < 3.5 %}-o{% elif i.averageReview >= 3.5 and i.averageReview < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
+                                        <i class="fa fa-star{% if i.averageReview < 4.5 %}-o{% elif i.averageReview >= 4.5 and i.averageReview < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
+                                       
+                                        </span>
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+                       
+                    </section>
+                 </div> <!--carousel-->
+    
+    
+            </div>
+            
+    </div>
+
+<!--carousel-->
+
+
+       
+    </div>
+</div> <!--container-->
+</section>

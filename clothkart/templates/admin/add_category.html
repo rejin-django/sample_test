@@ -1,0 +1,134 @@
+{% extends 'admin/layout.html' %}
+{% load static %}
+{% block content%} 
+
+<style>
+    
+    .dtsp-panes, .dtsp-panesContainer {
+        display: none;
+    }
+    #example {
+        float : right !important;
+    }
+
+
+
+</style>
+
+<div class="container">
+    <div class="card p-5">
+        <div id='error_message'>
+            {% include 'includes/alerts.html' %}
+           </div>
+        <h3 class="text-center">Add Category</h3>
+        <hr class="hr-center">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6 mt-2">
+                    <label for="category_name">Category&nbsp;Name&nbsp;:</label>
+                </div>
+                <div class="col-md-6 mt-2">
+                    <input type="text" name="category_name" class="form-control" id="category_name" value="{{form.category_name.value | default_if_none:'' }}">
+                    <span class="text-danger">{{form.errors.category_name}}</span>
+                </div>
+            </div>
+            <div class="row">
+            <div class="col-md-6 mt-2">
+                <label for="slug">Slug:</label>
+            </div>
+            <div class="col-md-6 mt-2">
+                <input type="text" name="slug" class="form-control" id="slug"  value="{{form.slug.value | default_if_none:'' }}" >
+                <span class="text-danger">{{form.errors.slug}}</span>
+            </div>
+        </div>
+
+
+        <div class="row">   
+        <div class="col-md-6 mt-2">
+            <label for="description">Product&nbsp;description&nbsp;:</label>
+        </div>
+        <div class="col-md-6 mt-2">
+            <input type="text" name="description" class="form-control" id="description" value="{{form.description.value | default_if_none:'' }}" >
+            <span class="text-danger">{{form.errors.description}}</span>
+        </div>
+    </div>
+
+ 
+    <div class="row">
+                <div class=" col-md-6 mt-2">
+                    <label for="cat_image">Product&nbsp;Image&nbsp;:</label>
+                </div>
+                <div class=" col-md-6 mt-2">
+                    <div id="voucher_image-holder" class="my-2 image-holder"></div>
+                    <input type="file" class="check__image-only" id="image" aria-describedby="emailHelp"
+                        onchange="onChangeFunction(event)" accept="image/*" name="cat_image" required
+                        src="{{form.cat_image.value}}"><span class="text-danger">{{form.errors.cat_image}}</span>
+
+                </div>
+            </div>
+    
+            <hr class="hr-center">
+            <div class="mt-2 text-center">
+                <button type="submit" class="btn btn-outline-success">Save</button>
+                <button type="reset" class="btn btn-outline-danger">Cancel</button>
+            </div>
+        
+         
+            </form>
+        </div>
+
+
+        <div class="card p-5">
+          <h3 class="text-center">Categories</h3>
+          <hr class="hr-center">
+          <form action="" method="post">
+              {% csrf_token %}
+    
+           <div class="table-responsive">
+                <table id="example" class="table table-striped nowrap"  style="overflow-x:auto;width:100%;">
+                      <thead>
+                          <tr>
+                              <th>S.No</th>
+                              <th>category_name</th>
+                              <th>slug</th>
+                             
+                            
+                              <th>description</th>
+                        
+                              <th>category image </th>
+                              <th>Status</th>
+      
+                          </tr>
+                        
+                      </thead>
+                      <tbody>
+                          {% for i in x %}
+                          <tr>
+                              <td>{{forloop.counter}}</td>
+                              <td>{{i.category_name}}</td>
+                              <td>{{i.slug}}</td>
+                             
+                              <td>{{i.description}}</td>
+                              <td><input type="file"  accept="image/*" name="cat_image" id="file"  onchange="loadFile(event)" style="display: none;">
+                              <img id="output" width="100" height="70" src="{{i.cat_image.url}}"/></td>
+                            
+                              <td>
+                          
+                                <a href="{% url 'category_delete' i.id  %}"> <i class="fa fa-trash p-2 text-danger"> </i></a>
+    
+                            </td>
+                              
+                              </tr>
+                          {% endfor %}
+                      </tbody>
+                  </table>
+              </div>
+          </form>
+      </div>
+
+
+
+    </div>
+
+{% endblock content %}

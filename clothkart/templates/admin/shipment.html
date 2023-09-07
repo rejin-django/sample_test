@@ -1,0 +1,143 @@
+{% extends 'admin/layout.html' %}
+{% load static %}
+{% block content%} 
+<style>
+  .table {
+    border-color: #dee2e600;
+  }
+</style>
+
+<section class="section-content padding-y bg">
+<div class="container">
+
+  <div class="card">
+    <div class="card-body">
+      <div id='error_message'>
+        {% include 'includes/alerts.html' %}
+       </div>
+      <h4 class="card-title mb-4 text-center">Supplier Shipment</h4>
+      <br>
+      <br>
+
+      
+
+      <form  action="" method="POST" >
+          {% csrf_token %}
+        
+              
+         
+        
+          <div class="form-group d-flex align-items-center justify-content-center">
+
+
+            <table class="table" style="width: 50%;">
+              <tbody>
+                <tr>
+                  <th><label class="control-label"><b>State :</b>&nbsp;&nbsp;&nbsp;</label></th>
+                  <td> <input class="form-control col-md-8" type="text"  value="{{shipments.order.state}}" name="state" disabled />
+{% comment %} 
+                  <td>          <textarea class="form-control col-md-8"  name="location_status" required ></textarea> {% endcomment %}
+                  </td>
+              
+                </tr>
+                <tr>
+                  <th><label class="control-label"><b>District :</b>&nbsp;&nbsp;&nbsp;</label></th>
+                  <td> <input class="form-control col-md-8" type="text"  value="{{shipments.order.district}}" name="district" disabled />
+{% comment %} 
+                  <td>          <textarea class="form-control col-md-8"  name="location_status" required ></textarea> {% endcomment %}
+                  </td>
+              
+                </tr>
+                {% comment %} <tr>
+                  <th><label class="control-label"><b>State:</b>&nbsp;:&nbsp;&nbsp;</label></th>
+                  <td><select  class="form-control" name="state" required >
+                    <option value="" >  ----------------------</option>
+                    {% for i in state %}
+                    <option value="{{i.state}}">{{i.state}}</option>
+                    {% endfor %}
+                    
+                  
+                  
+                  </select> 
+                  <span class="text-danger">{{form.errors.state}}</span></td>
+                 
+                </tr> {% endcomment %}
+                {% comment %} <tr>
+                  <th><label class="control-label"><b>District:</b>&nbsp;:&nbsp;&nbsp;</label></th>
+                  <td><select  class="form-control" name="district" required >
+                    <option value="" >  ----------------------</option>
+                    {% for i in district %}
+                    <option value="{{i.district}}">{{i.district}}</option>
+                    {% endfor %}
+                  
+                    
+                  </select> </td>
+                  <span class="text-danger">{{form.errors.district}}</span>
+                </tr> {% endcomment %}
+                <tr>
+                  <th><label class="control-label"><b>Main Agent:</b>&nbsp;&nbsp;&nbsp;</label></th>
+                  <td><select  class="form-control" name="main_agent" required >
+                    <option value="" >  ----------------------</option>
+                    {% for i in main_agent %}
+                    <option value="{{i.agent_organization_name}}">{{i.agent_organization_name}}/{{i.state}}/{{i.district}}</option>
+                    {% endfor %}
+                  
+                  
+                  </select> </td>
+                  <span class="text-danger">{{form.errors.main_agent}}</span>
+                </tr>
+                <tr>
+                  <th><label class="control-label"><b>Location status :</b>&nbsp;&nbsp;&nbsp;</label></th>
+                  <td>          <textarea class="form-control col-md-8"  name="location_status" required ></textarea>
+                  </td>
+                  <span class="text-danger">{{form.errors.location_status}}</span>
+                </tr>
+                <tr>
+                  <th><label class="control-label"><b>Expected Delivery Date :</b>&nbsp;&nbsp;&nbsp;</label></th>
+                  <td>          <input class="form-control col-md-8" type="date" name="expected_delivery_date" required  />
+                  </td>
+                  <span class="text-danger">{{form.errors.expected_delivery_date}}</span>
+                </tr>
+                <tr>
+                  <th><label class="control-label"><b>Shipping Date :</b>&nbsp;&nbsp;&nbsp;</label></th>
+                  <td>                    <input class="form-control col-md-8" type="date"  name="created_date" required  /><br><br>
+
+                  </td>
+                  <span class="text-danger">{{form.errors.created_date}}</span>
+                </tr>
+               
+                  
+                </tr>
+              </tbody>
+            </table>
+
+     
+     
+          </div> 
+          <span class="d-flex justify-content-center">
+            <button type="submit" name="submit" class="btn btn-dark btn-block">Submit</button>
+          </span>
+
+
+      
+     </form>
+  
+        
+  
+   
+        
+  
+  
+
+
+
+
+<!-- ============================ COMPONENT 1 END .// ================================= -->
+
+
+
+
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+{% endblock %}

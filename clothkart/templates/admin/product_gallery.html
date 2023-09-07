@@ -1,0 +1,116 @@
+{% extends 'admin/layout.html' %}
+{% load static %}
+{% block content%} 
+
+<style>
+    
+    .dtsp-panes, .dtsp-panesContainer {
+        display: none;
+    }
+    #example {
+        float : right !important;
+    }
+
+
+
+</style>
+
+
+<div class="container" >
+
+
+
+    <div class="card p-5">
+        <div id='error_message'>
+            {% include 'includes/alerts.html' %}
+           </div>
+        <h3 class="text-center">Add product gallery</h3>
+        <hr class="hr-center">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6 mt-2">
+                    <label for="product">Product:</label>
+                </div>
+                <div class="col-md-6 mt-2">
+                    <select name="product" id="product" class="form-control" value="{{form.product.value}}" required>
+                        <option value="">------------------------</option>
+                        {% for i in y %}
+                        <option value="{{i.id}}">{{i.product_name}}</option>
+                      {% endfor %}
+                    </select>
+                    <span class="text-danger">{{form.errors.product}}</span>
+                </div>
+            </div>
+
+            <div class="row">
+              <div class=" col-md-6 mt-2">
+                  <label for="image">Product&nbsp;Image&nbsp;:</label>
+              </div>
+              <div class=" col-md-6 mt-2">
+                  <div id="voucher_image-holder" class="my-2 image-holder"></div>
+                  <input type="file" class="check__image-only" id="image" aria-describedby="emailHelp"
+                      onchange="onChangeFunction(event)" accept="image/*" name="image" required
+                      value="{{form.image.value}}"><span class="text-danger">{{form.errors.image}}</span>
+
+              </div>
+          </div>
+
+ 
+    
+            <hr class="hr-center">
+            <div class="mt-2 text-center">
+                <button type="submit" class="btn btn-outline-success">Save</button>
+                <button type="reset" class="btn btn-outline-danger">Cancel</button>
+            </div>
+        
+         
+            </form>
+        </div>
+
+
+        <div class="card p-5">
+          <h3 class="text-center">Products Gallery</h3>
+          <hr class="hr-center">
+         
+    
+             <div class="table-responsive">
+                <table id="example" class="table table-striped nowrap"  style="overflow-x:auto;width:100%;">
+                      <thead>
+                          <tr>
+                              <th >S.No</th>
+                              <th >product&nbsp;Name</th>
+                              <th >product&nbsp;Image</th>
+                              <th >Action</th>
+                             
+                           
+     
+                          </tr>
+                        
+                      </thead>
+                      <tbody>
+                          {% for i in y %}
+                          <tr>
+                              <td>{{forloop.counter}}</td>
+                              <td>{{i.product_name}}</td>
+                              <td><input type="file"  accept="image/*" name="images" id="file"  onchange="loadFile(event)" style="display: none;">
+                                <img id="output" width="100" height="70" src="{{i.images.url}}"/></td>
+                        
+                                {% comment %} <td>
+                                  <a href="{% url 'productgallery_delete' i.id  %}"> <i class="fa fa-trash p-2 text-danger"> </i></a>
+      
+                                </td> {% endcomment %}
+                           <td> <a href="{% url 'view_gallery' i.id  %}"> <button class="text-info">View</button></a></td>
+                              </tr>
+                          {% endfor %}
+                      </tbody>
+                  </table>
+              </div>
+    
+      </div>
+    
+
+
+    </div>
+
+{% endblock content %}

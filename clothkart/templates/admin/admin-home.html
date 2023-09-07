@@ -1,0 +1,157 @@
+ {% extends 'base2.html' %}
+ {% load static %}
+
+ {% block content %}
+<style>
+
+
+
+
+/* Toggle Styles */
+
+#viewport {
+  padding-left: 250px;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#content {
+  width: 100%;
+  position: relative;
+  margin-right: 0;
+}
+
+/* Sidebar Styles */
+
+#sidebar {
+
+  position: absolute;
+  margin-top: 132px;
+  left: 250px;
+  width: 250px;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: #2d2929;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+
+
+#sidebar header a {
+  color: #fff;
+  display: block;
+  text-decoration: none;
+}
+
+#sidebar header a:hover {
+  color: #fff;
+}
+
+#sidebar .nav{
+  
+}
+
+#sidebar .nav a{
+  background: none;
+  border-bottom: 1px solid #455A64;
+  color: #CFD8DC;
+  font-size: 20px;
+  line-height: 82px;
+  text-align: center;
+  
+}
+
+#sidebar .nav a:hover{
+  background: transparent;
+  color: #ECEFF1;
+}
+
+#sidebar .nav a i{
+  margin-right: 16px;
+}
+.total{
+  height: 100%%;
+}
+</style>
+<div class="total">
+<div id="viewport">
+    <!-- Sidebar -->
+    <div id="sidebar">
+     
+      <ul class="nav">
+       
+        <li>
+          <a href="{% url 'add_product' %}">
+            <i class="zmdi zmdi-link"></i> Add Product
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'add_category' %}">
+            <i class="zmdi zmdi-widgets"></i> Add Categories
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'add_product_variation' %}">
+            <i class=""></i> Add product variation
+          </a>
+        </li>
+       
+        <li>
+          <a href="{% url 'add_product_gallery' %}">
+            <i class=""></i> Add product gallery
+          </a>
+        </li>
+       
+     
+      </ul>
+    </div>
+ <!-- Content -->
+    <div id="content">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="#"><i class="zmdi zmdi-notifications text-danger"></i>
+              </a>
+            </li>
+            <li><a href="#">Test User</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="container-fluid">
+        <h1>Simple Sidebar</h1>
+        <p>
+          Make sure to keep all page content within the 
+          <code>#content</code>.
+          <p>
+            Make sure to keep all page content within the 
+            <code>#content</code>.
+            <p>
+                Make sure to keep all page content within the 
+                <code>#content</code>.
+                <p>
+                    Make sure to keep all page content within the 
+                    <code>#content</code>.
+                    <p>
+                        Make sure to keep all page content within the 
+                        <code>#content</code>.
+                        <br>
+                        <br>
+                        <br>
+
+                        <br>
+                        <br>
+                        <br>   <br>   <br>   <br>   <br>  <br>  <br> 
+        </p>
+      </div>
+    </div>
+  </div> 
+</div>
+
+ {% endblock content %}

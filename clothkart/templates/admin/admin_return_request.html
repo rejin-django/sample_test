@@ -1,0 +1,153 @@
+{% extends 'admin/layout.html' %}
+{% load static %}
+{% block content%} 
+
+<style>
+    
+    .dtsp-panes, .dtsp-panesContainer {
+        display: none;
+    }
+    #example {
+        float : right !important;
+    }
+
+
+
+</style>
+<div class="container">
+    <div class="card p-5">
+        <h3 class="text-center">Admin Return Detail</h3>
+        <hr class="hr-center">
+        <form action="" method="post">
+            {% csrf_token %}
+    
+            <div class="table-responsive"> 
+                <table id="example" class="table table-striped nowrap"  style="overflow-x:auto;width:100%;">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Return Id </th>
+                            <th>Order number </th>
+                            <th>Product Name </th>
+                            {% comment %} <th>Product Image</th> {% endcomment %}
+                            <th>Phone_number</th>
+                          
+                            <th>Address </th> 
+                            <th>Supplier</th> 
+                            <th>Return pickup date </th> 
+                            <th>Action</th>
+                        </tr>
+                      
+                    </thead>
+                    <tbody>
+                        {% for i in order %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                             <td>{{i.return_id}}</td>
+                             <td>{{i.order.order.order_number}}</td>
+
+                            <td>{{i.order.product.product_name}}</td>
+                            {% comment %} <td><input type="file"  accept="image/*" name="images" id="file"  onchange="loadFile(event)" style="display: none;">
+                                <img id="output" width="100" height="70" src="{{i.order.product.images.url}}"/> <br>
+                                {% for j in i.variations.all %}
+                                {{j.variation_category}} - {{j.variation_value}} 
+                                {% endfor %}</td> {% endcomment %}
+                          
+                            <td>{{i.phone}}</td>
+                    
+                            <td>{{i.address_line_1}},
+                            {{i.city}},{{i.district}},{{i.state}},
+                            {{i.country}},
+                            {{i.pincode}}
+                        </td>
+                        <td>{{i.order.supplier.first_name}}</td>
+                        <td>{{i.return_pickup_date}}</td>
+                        {% if i.admin_return_status == "return_requested" %}
+
+                        <td class="text-success">
+                            Sent return <br>request to <br> supplier  - {{i.order.supplier.first_name}}</td>
+                            {% elif i.admin_return_status == "refunded" %}
+                            <td class="text-success">
+                                Refund complete</td>
+                        {% else %}
+                        <td>
+                         
+
+                          <button class="btn btn-outline-danger">  <a href="{% url 'admin_return_verify' i.id %}">Return request</a></button>
+                        
+                        </td>
+                        {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<div class="container">
+    <div class="card p-5">
+        <h3 class="text-center">Return completed products</h3>
+        <hr class="hr-center">
+        <form action="" method="post">
+            {% csrf_token %}
+    
+            <div class="table-responsive"> 
+                <table id="example" class="table table-striped nowrap"  style="overflow-x:auto;width:100%;">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Return Id </th>
+                            <th>Product Name </th>
+                            <th>Product Image</th>
+                            <th>Phone_number</th>
+                          
+                            <th>Address </th> 
+                            <th>Supplier</th> 
+                            <th>Return pickup date </th> 
+                            <th>Action</th>
+                        </tr>
+                      
+                    </thead>
+                    <tbody>
+                        {% for i in return_obj %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                             <td>{{i.return_id}}</td>
+
+                            <td>{{i.order.product.product_name}}</td>
+                            <td><input type="file"  accept="image/*" name="images" id="file"  onchange="loadFile(event)" style="display: none;">
+                                <img id="output" width="100" height="70" src="{{i.order.product.images.url}}"/> <br>
+                                {% for j in i.variations.all %}
+                                {{j.variation_category}} - {{j.variation_value}} 
+                                {% endfor %}</td>
+                          
+                            <td>{{i.phone}}</td>
+                    
+                            <td>{{i.address_line_1}},{{i.address_line_2}} <br>
+                            {{i.city}}, {{i.state}},<br>
+                             {{country}}  <br>
+                            {{i.pincode}}
+                        </td>
+                        <td>{{i.order.supplier.first_name}}</td>
+                        <td>{{i.return_pickup_date}}</td>
+                   <td class="text-success">Return complete</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+    
+    
+    
+    </div>
+
+
+
+
+{% endblock content %}

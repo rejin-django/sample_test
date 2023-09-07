@@ -1,0 +1,19 @@
+
+body
+{
+    margin: 0;
+    padding: 0;
+}
+.dtsp-panes {
+    display: none !important;
+}
+.dtsp-panesContainer {
+    display: none !important;
+}
+.dataTables_filter{
+    display: flex;
+    justify-content: right;
+}
+.pagination {
+    justify-content: right;
+}

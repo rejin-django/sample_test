@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .fa-chevron-right {
+        font-size: 20px; 
+        color: #000; 
+        background-color: #ffffff; 
+        padding: none; 
+        box-shadow: none; 
+    } p {
+        color: rosybrown;
+    }
+</style>
+<section class="bg">
+ <div class="container">
+    <div class="breadcums pt-4">
+        <span class="float-left">
+            <a href="{% url 'my_order' %}"><i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;Back to order</a>
+        </span>
+        {% comment %} <span class="float-right">
+            <a href="">Need help ?</a>
+        </span> {% endcomment %}
+
+    </div>
+    <div class="row">
+        
+        <div class="col-md-9 mt-5 mb-5">
+            <div class="rightsideorders pt-4 pb-4">
+                {% if return_detail.expected_delivery_date != None %}
+                <div class="d-flex align-items-center justify-content-between">
+                    <h4 class=""><i class="fas fa-truck"></i> &nbsp; <b>My Orders</b></h4><span> Expected delivery :  {{return_detail.expected_delivery_date}} </span>
+                </div>
+                {% endif %}
+
+                <h6>
+
+                    <div class="progress-track">
+                        <ul id="progressbar">
+                            {% if return_detail.ordered %}
+                            <li class="step0 active " id="step1">Ordered</li>
+                            {% else %}
+                            <li class="step0 " id="step1">Ordered</li>
+                             {% endif %}
+                             {% if return_detail.is_shipped %}
+                            <li class="step0 active text-center" id="step2">Shipped</li>
+                             <li class="step0 active text-right" id="step3">On the way</li>
+                            {% else %}
+                            <li class="step0  text-center" id="step2">Shipped</li>
+                            <li class="step0  text-right" id="step3">On the way</li>
+                           
+                             {% endif %} 
+
+                            {% if return_detail.status_method == "Delivered" %}
+                            <li class="step0 active text-right" id="step4">Delivered</li>
+                            {% else %}
+                            <li class="step0 text-right" id="step4">Delivered</li>
+                            {% endif %}
+                        </ul>
+                    </div><br>
+                    {% if return_detail.is_shipped %}
+                    <span class="float-right progress-view"> 
+                        <a href="{% url 'order_tract_detail' return_detail.id %}">View Tracking</a></span>
+                        {% endif %}
+                </h6>
+                <br><br>
+                
+                <span class="lightclr pl-2">shipping to</span>
+                <h5 class="pl-2">{{return_detail.order.first_name}}</h5>
+                {% if return_detail.main_agent != None %}
+                <span class="lightclr pl-2">Delivery partner:  <span class="text-dark"> {{return_detail.main_agent}}</span></span><br>
+                {% endif %}
+                {% if return_detail.trackID != None %}
+                <span class="lightclr pl-2">Tracking ID:<span class="text-dark"> {{return_detail.trackID}} </span></span>
+                {% endif %}
+                <div class="showproduct">
+                    <br>
+                    <hr>
+                    <a href="">
+                        <div class="d-flex align-items-center ml-4 mr-4 p-4">
+                       
+                            <div class="col-9 d-flex align-items-center">
+                               <div class="col-5">
+                                <input type="file"  accept="image/*" name="images" id="file"  onchange="loadFile(event)" style="display: none;">
+                                <img id="output" width="100" height="70" src="{{return_detail.product.images.url}}"/>
+                                   {% comment %} <img src="{{retur_detail}}" alt="" width="100%"> {% endcomment %}
+                               </div>
+                               <div class="col-10">
+                                  <h5><span class="lightclr">Product name : {{return_detail.product.product_name}}</span></h5>
+                                 <h5><span class="text-dark">Price :  ₹ {{return_detail.total_price}}</span></h5> 
+                                 <h5> <span class="lightclr">Order Id: #{{return_detail.order.order_number}}</span> </h5>
+                               </div>
+                            </div>
+                            {% if return_detail.status_method == "Delivered" %}
+                                  Delivered
+                                {% endif %}
+
+                            {% comment %} {% if return_detail.is_reached %}
+                            <p></p>
+                            {% else %} {% endcomment %}
+                            {% comment %} {% if return_detail.is_reached  %}
+                            <p></p> {% endcomment %}
+                            {% if return_detail.return_status == "return_requested" %}
+                            <p>Return request submitted </p>
+                            {% elif return_detail.return_status == "return_confirmed" %}
+                            <p>Return confirmed</p>
+                            {% elif return_detail.return_status == "return_complete" %}
+                            <p>Return complete</p>
+                            {% elif return_detail.return_status == "refund_initiated" %}
+                            <p>Refund Initiate</p>
+                            {% elif return_detail.return_status == "refunded" %}
+                            <p>Refunded </p>
+                            {% elif return_detail.status_method == "Delivered" %}
+            
+                             <a href="{% url 'order_return' return_detail.id %}"><button class="btnsn">Return</button></a>
+                             {% endif %}
+
+                             {% if return_detail.is_shipped %}
+                          <div class="col-3">  <a href="{% url 'order_tract_detail' return_detail.id %}"><button class="btnsn">Track order</button></a></div>
+                          {% endif %}
+                        </div>
+                    </a>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mt-5 mb-5">
+            <div class="leftsideorder pl-4">
+                <div class="">
+                    <span class="lightclr pt-1">Order ID : #{{return_detail.order.order_number}} ({{return_detail.quantity}} Item)</span>
+                    <span class="lightclr pt-1">Order Place on {{return_detail.created_at}}</span>
+                    <p class="pt-1">Paid by {{return_detail.order.payment.payment_method}}</p>
+                </div>
+                <hr>
+                <div class="">
+                    <h5><b>Order Payment Details</b></h5>
+                    <div class="table-responsive">
+                        <table class="table">
+                          
+                          <tbody>
+                            <tr>
+                              <td>Order Amount</td>
+                              <td class="text-end">₹ {{subtotal}}</td>
+                              
+                            </tr>
+                         
+                            <tr>
+                                <td>Tax</td>
+                                <td class="text-end">₹ {{return_detail.order.tax}}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Order Total</b></td>
+                                <td class="text-end"><b>₹ {{return_detail.order.order_total}}</b></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+ </div>
+</section>
+ {% endblock content %}
